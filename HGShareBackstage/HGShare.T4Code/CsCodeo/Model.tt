@@ -1,0 +1,40 @@
+﻿<#@ template debug="false" hostspecific="True" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ include file="$(ProjectDir)\ProjectInit.ttinclude"  #>
+<# 
+	var manager = Manager.Create(Host, GenerationEnvironment); 
+	var tables=new DbHelper(Settings.DBConfig);
+#>
+<# foreach(DbTable table in tables.GetDbTables())  { #>
+<# manager.StartHeader(); #>
+<#
+	    manager.StartNewFile(table.TableName+"Info.cs");//开始输出文件
+#>
+using System;
+namespace <#=Settings.BaseNamespace#>.Model
+{    
+	/// <summary>
+    /// <#=table.TableName#> 实体
+    /// </summary>
+    public class <#=table.TableName#>Info
+    {
+		<# foreach(DbColumn column in tables.GetDbColumns(table.OldTableName)){#>
+/// <summary>
+		/// <#=column.Remark#>
+		/// </summary>        
+		public <#= column.CSharpType#><# if(column.CommonType.IsValueType && column.IsNullable){#>?<#}#> <#=column.ColumnName#> { get; set; }
+		<#}#> 
+    }
+}
+<#	
+	manager.EndBlock();//结束输出
+#>
+
+<#}#>
+<#	
+   manager.Process(true);
+#>

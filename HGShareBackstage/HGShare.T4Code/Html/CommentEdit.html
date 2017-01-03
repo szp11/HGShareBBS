@@ -1,0 +1,218 @@
+@using HGShare.Site
+@model HGShare.VWModel.CommentVModel
+@{
+    ViewBag.Title = "修改Comment";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改Comment</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @using(Html.BeginForm("Edit", "Comments", FormMethod.Post, new { @class = "form-horizontal",id="addform" }))
+                    {
+
+					 					 <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Id, new { @class = "form-control", @placeholder = "请输入" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Id)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">文章Id</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.AId, new { @class = "form-control", @placeholder = "请输入文章Id" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.AId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">评论用户Id</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.UserId, new { @class = "form-control", @placeholder = "请输入评论用户Id" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.UserId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">创建时间</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.CreateTime, new { @class = "form-control", @placeholder = "请输入创建时间" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.CreateTime)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">评论内容</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Content, new { @class = "form-control", @placeholder = "请输入评论内容" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Content)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">评论者Ip</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.IP, new { @class = "form-control", @placeholder = "请输入评论者Ip" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.IP)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">用户UA信息</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.UserAgent, new { @class = "form-control", @placeholder = "请输入用户UA信息" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.UserAgent)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">审核状态0待审核 1已通过 2未通过</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.State, new { @class = "form-control", @placeholder = "请输入审核状态0待审核 1已通过 2未通过" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.State)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">拒绝原因</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.RefuseReason, new { @class = "form-control", @placeholder = "请输入拒绝原因" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.RefuseReason)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">是否删除</label>
+                            <div class="col-sm-5">
+                                							   <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsDelete, true, new { id = "IsDelete1" })
+                                    <label for="IsDelete1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsDelete, false, new { id = "IsDelete2" })
+                                    <label for="IsDelete2">
+                                        否
+                                    </label>
+                                </div>
+							                               </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.IsDelete)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">最后修改用户 0默认</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.LastEditUserId, new { @class = "form-control", @placeholder = "请输入最后修改用户 0默认" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.LastEditUserId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">最后修改时间</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.LastEditTime, new { @class = "form-control", @placeholder = "请输入最后修改时间" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.LastEditTime)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">是否置顶</label>
+                            <div class="col-sm-5">
+                                							   <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsStick, true, new { id = "IsStick1" })
+                                    <label for="IsStick1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsStick, false, new { id = "IsStick2" })
+                                    <label for="IsStick2">
+                                        否
+                                    </label>
+                                </div>
+							                               </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.IsStick)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">点赞数</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.DianZanNum, new { @class = "form-control", @placeholder = "请输入点赞数" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.DianZanNum)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+								
+
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                @Html.HiddenFor(n=>n.Id)
+                                <button class="btn btn-primary" type="submit" id="submit">保存内容</button>
+                                <button class="btn btn-white" type="button" onclick="window.history.back(-1);">取消</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_footer
+{
+    <!--表单验证-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.js?v=1.35")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.unobtrusive.js?v=1.40")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/jquery.form.js")"></script>
+    <script type="text/javascript">
+        ValidataTools.Init({
+            backurl: "@Url.Action("Index", "Comments")",
+            form: $("#addform"),
+            submitbtn: $("#submit"),
+            btntext: "保存内容",
+            tipstype:"修改"
+        });
+    </script>
+}
+

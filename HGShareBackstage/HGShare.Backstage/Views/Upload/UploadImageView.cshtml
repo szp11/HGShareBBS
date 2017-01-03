@@ -1,0 +1,55 @@
+﻿@using HGShare.Enums
+@using HGShare.Site
+@using Newtonsoft.Json
+@model IList<HGShare.VWModel.AttachmentVModel>
+@{
+    /*上传guid*/
+    string guid = ViewBag.Guid != null ? ViewBag.Guid.ToString() : Guid.NewGuid().ToString();
+}
+<!--模板引擎-->
+<script src="@Url.StaticFile("~/hplus/js/laytpl/laytpl.js")"></script>
+<!--图片上传框模板-->
+<script type="text/html" id="uploadImgTemplate">
+    <div class="col-sm-7">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form role="form">
+                            <div class="form-group">
+                                <label class="control-label">图片地址</label><input placeholder="支持远程图片地址或上传本地图片。" class="form-control input-lg" type="text">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success btn-sm" type="button">
+                                    <i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">上传</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+    var UploadImage = {
+        //images:@Html.Raw(JsonConvert.SerializeObject(Model.Where(n => n.BType == (int)FileType.Image))),
+        //files:@Html.Raw(JsonConvert.SerializeObject(Model.Where(n => n.BType != (int)FileType.Image))),
+        layerIndex: 0,
+        Show: function () {
+            var gettpl = $("#uploadImgTemplate").html();
+            var index = layer.open({
+                id: "uploadImg_@(guid)",
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['500px', '300px'],
+                title: "图片上传",
+                content: gettpl
+            });
+            this.layerIndex = index;
+        },
+        Close: function () {
+            layer.close(this.layerIndex);
+        }
+    };
+</script>

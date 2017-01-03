@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "注册账号";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div class="main layui-clear">
+    <h2 class="page-title">注册</h2>
+    <div class="layui-form layui-form-pane">
+        <form method="post">
+            <div class="layui-form-item">
+                <label for="Name" class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="Name" name="Name" required lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">将会成为您唯一的登入名</div>
+            </div>
+            <div class="layui-form-item">
+                <label for="NickName" class="layui-form-label">昵称</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="NickName" name="NickName" required lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="Password" class="layui-form-label">密码</label>
+                <div class="layui-input-inline">
+                    <input type="password" id="Password" name="Password" required lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">6到16个字符</div>
+            </div>
+            <div class="layui-form-item">
+                <label for="ConfirmPassword" class="layui-form-label">确认密码</label>
+                <div class="layui-input-inline">
+                    <input type="password" id="ConfirmPassword" name="ConfirmPassword" required lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="Email" class="layui-form-label">邮箱</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="Email" name="Email" required lay-verify="email" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">方便密码找回或信息通知</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="Sex" value="1" title="男" checked="checked">
+                    <div class="layui-unselect layui-form-radio layui-form-radioed">
+                        <i class="layui-anim layui-icon layui-anim-scaleSpring"></i>
+                        <span>男</span>
+                    </div>
+                    <input type="radio" name="Sex" value="2" title="女">
+                    <div class="layui-unselect layui-form-radio ">
+                        <i class="layui-anim layui-icon"></i>
+                        <span>女</span>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_vercode" class="layui-form-label">人类验证</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="Vercode" name="Vercode" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid vercodeimg">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <input type="hidden" id="backUrl" name="backUrl" autocomplete="off" class="layui-input" value="@ViewBag.BackUrl">
+                <button class="layui-btn" lay-filter="*" lay-submit alert="true">立即注册</button>
+            </div>
+            @*<div class="layui-form-item fly-form-app">
+                <span>或者直接使用社交账号快捷注册</span>
+                <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
+                <a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
+            </div>*@
+        </form>
+    </div>
+</div>
+@section main_back_Script
+{
+    <script type="text/javascript">
+        //表单异步提交
+        //验证码刷新
+        layui.use(['formsubmit','verifycode']);
+    </script>
+}

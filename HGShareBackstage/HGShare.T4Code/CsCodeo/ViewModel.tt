@@ -1,0 +1,60 @@
+﻿<#@ template debug="false" hostspecific="True" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ include file="$(ProjectDir)\ProjectInit.ttinclude"  #>
+<# 
+	var manager = Manager.Create(Host, GenerationEnvironment); 
+	var tables=new DbHelper(Settings.DBConfig);
+	
+#>
+<# foreach(DbTable table in tables.GetDbTables())  { #>
+<# manager.StartHeader(); #>
+<#
+	    manager.StartNewFile(table.TableName+"VModel.cs");//开始输出文件
+	   List<DbColumn> columns= tables.GetDbColumns(table.OldTableName);
+	//得到主键信息
+		DbColumn primaryKeyCol=DbHelper.GetPrimaryKey(columns);
+		string pk=primaryKeyCol==null?"Id":primaryKeyCol.ColumnName;
+#>
+using System;
+using System.ComponentModel.DataAnnotations;
+namespace <#=Settings.BaseNamespace#>.VWModel
+{    
+	/// <summary>
+    /// <#=table.TableName#> View Model
+    /// </summary>
+    public class <#=table.TableName#>VModel
+    {
+		<# foreach(DbColumn column in tables.GetDbColumns(table.OldTableName)){#>
+/// <summary>
+		/// <#=column.Remark#>
+		/// </summary>
+		<#if(column.IsString){#>
+[MaxLength(<#=column.CharLength#>, ErrorMessage = "<#=column.Remark#>最大长度为<#=column.CharLength#>字符！")]
+		<#}#>
+<#if(!column.IsNullable){#>
+[Required(ErrorMessage = "<#=column.Remark#>不能为空！")]
+		<#}#>
+[Display(Name = "<#=column.Remark#>")]     
+		public <#= column.CSharpType#><# if(column.CommonType.IsValueType && column.IsNullable){#>?<#}#> <#=column.ColumnName#> { get; set; }
+		<#}#> 
+		/// <summary>
+		/// 根据主键是否是默认值判断是不是空对象<#=pk#>==0
+		/// </summary>
+		public bool IsNull 
+		{ 
+			get{return <#=pk#>==0;}
+		}
+    }
+}
+<#	
+	manager.EndBlock();//结束输出
+#>
+
+<#}#>
+<#	
+   manager.Process(true);
+#>

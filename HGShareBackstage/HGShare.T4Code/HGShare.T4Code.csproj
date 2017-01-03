@@ -1,0 +1,749 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5C48D41A-EE49-4ABB-8502-C919103302AE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HGShare.T4Code</RootNamespace>
+    <AssemblyName>HGShare.T4Code</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminLogVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="AreaVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="ArticleTypeVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="ArticleVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="AttachmentVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="CommentVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AdminLogInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AdminLogsBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AdminLogsController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AdminLogsDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AdminLogVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AreaInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AreasBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AreasController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AreasDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AreaVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ArticleHotFieldInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ArticleHotFieldVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ArticleInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ArticlesBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ArticlesController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ArticlesDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ArticleTypeInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ArticleTypesBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ArticleTypesController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ArticleTypesDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ArticleTypeVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ArticleVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AttachmentInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AttachmentsBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AttachmentsController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AttachmentsDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\AttachmentVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\Bll.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\CommentInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\CommentsBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\CommentsController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\CommentsDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\CommentVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\Controller.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\Dal.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\DianZanLogInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\DianZanLogsBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\DianZanLogsController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\DianZanLogsDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\DianZanLogVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\EmailTemplateInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\EmailTemplatesBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\EmailTemplatesController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\EmailTemplatesDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\EmailTemplateVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ModulInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ModulVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\NotifyInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\NotifysBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\NotifysController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\NotifysDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\NotifyVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\RoleInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\RoleModulInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\RoleModulVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\RoleVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\SendMailLogInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\SendMailLogsBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\SendMailLogsController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\SendMailLogsDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\SendMailLogVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\TagInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\TagsBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\TagsController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\TagsDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\TagVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserAccessLogInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserAccessLogsBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserAccessLogsController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserAccessLogsDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserAccessLogVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserActivateTokenInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserActivateTokensBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserActivateTokensController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserActivateTokensDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserActivateTokenVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserBuyingLogInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserBuyingLogsBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserBuyingLogsController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserBuyingLogsDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserBuyingLogVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserOtherInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserOthersBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserOthersController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserOthersDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserOtherVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserPositionInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserPositionsBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserPositionsController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserPositionsDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserPositionVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserScoreLogInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserScoreLogsBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserScoreLogsController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserScoreLogsDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserScoreLogVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UserVModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ViewModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ModulsBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ModulsController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\ModulsDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\RoleModulsBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\RoleModulsController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\RoleModulsDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\RolesBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\RolesController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\RolesDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UsersBll.cs">
+      <DependentUpon>Bll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UsersController.cs">
+      <DependentUpon>Controller.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CsCodeo\UsersDal.cs">
+      <DependentUpon>Dal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DianZanLogVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplateVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="ModulVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleModulVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="RoleVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="SendMailLogVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="TagVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="UserAccessLogVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="UserActivateTokenVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="UserBuyingLogVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="UserOtherVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="UserPositionVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="UserVModel.cs">
+      <DependentUpon>ProjectInit.ttinclude</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CsCodeo\Bll.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Bll.cs</LastGenOutput>
+    </None>
+    <None Include="CsCodeo\Dal.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Dal.cs</LastGenOutput>
+    </None>
+    <None Include="CsCodeo\Controller.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Controller.cs</LastGenOutput>
+    </None>
+    <None Include="CsCodeo\ViewModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ViewModel.cs</LastGenOutput>
+    </None>
+    <None Include="CsCodeo\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </None>
+    <None Include="DbHelper.ttinclude" />
+    <None Include="Html\Edit.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Edit.html</LastGenOutput>
+    </None>
+    <None Include="Html\Add.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Add.html</LastGenOutput>
+    </None>
+    <None Include="Html\List.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>List.html</LastGenOutput>
+    </None>
+    <None Include="MultipleOutputHelper.ttinclude" />
+    <None Include="ProjectInit.ttinclude" />
+    <None Include="SqlService\Procedure.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Procedure.sql</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Html\AdminLogAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\AdminLogEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\AreaAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\AreaEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\AreaIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\ArticleAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\ArticleEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\ArticleTypeAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\ArticleTypeEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\AttachmentAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\AttachmentEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\CommentAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\CommentEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\CommentIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\DianZanLogAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\DianZanLogEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\DianZanLogIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\Edit.html">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\AdminLogIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\ArticleIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\ArticleTypeIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\AttachmentIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\Add.html">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\EmailTemplateAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\EmailTemplateEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\EmailTemplateIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\List.html">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\ModulAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\ModulEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\ModulIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\NotifyAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\NotifyEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\NotifyIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\RoleAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\RoleEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\RoleIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\RoleModulAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\RoleModulEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\RoleModulIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\SendMailLogAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\SendMailLogEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\SendMailLogIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\TagIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserAccessLogAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserAccessLogEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserAccessLogIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserActivateTokenAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserActivateTokenEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserActivateTokenIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserBuyingLogAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserBuyingLogEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserBuyingLogIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserOtherAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserOtherEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserOtherIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserPositionAdd.html">
+      <DependentUpon>Add.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserPositionEdit.html">
+      <DependentUpon>Edit.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserPositionIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="Html\UserScoreLogIndex.html">
+      <DependentUpon>List.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\AdminLog.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\Area.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\Article.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\ArticleType.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\Attachment.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\Comment.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\DianZanLog.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\Modul.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\Notify.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\Procedure.sql">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\Role.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\RoleModul.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\User.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\UserAccessLog.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\UserBuyingLog.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\UserOther.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+    <Content Include="SqlService\UserPosition.sql">
+      <DependentUpon>Procedure.tt</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

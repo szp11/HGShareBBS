@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "登入";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+<div class="main layui-clear">
+    <h2 class="page-title">登入</h2>
+    <div class="layui-form layui-form-pane">
+        <form method="post">
+            <div class="layui-form-item">
+                <label for="UserName" class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="UserName" name="UserName" required lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="Password" class="layui-form-label">密码</label>
+                <div class="layui-input-inline">
+                    <input type="password" id="Password" name="Password" required lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            
+            <div class="layui-form-item">
+                <label for="Vercode" class="layui-form-label">人类验证</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="Vercode" name="Vercode" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid vercodeimg">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <input type="hidden" id="backUrl" name="backUrl"  autocomplete="off" class="layui-input" value="@ViewBag.BackUrl">
+                <button class="layui-btn" lay-filter="*" lay-submit>立即登录</button>
+                <span style="padding-left:20px;">
+                    <a href="@Url.Action("forgetpassword","user")">忘记密码？</a>
+                </span>
+            </div>
+            @*<div class="layui-form-item fly-form-app">
+                <span>或者使用社交账号登入</span>
+                <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
+                <a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
+            </div>*@
+        </form>
+    </div>
+</div>
+@section main_back_Script
+{
+    <script type="text/javascript">
+        //表单异步提交
+        //验证码刷新
+        layui.use(['formsubmit','verifycode']);
+    </script>
+    }
+

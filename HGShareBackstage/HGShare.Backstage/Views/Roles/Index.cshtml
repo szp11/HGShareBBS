@@ -1,0 +1,155 @@
+﻿@using HGShare.Site.Config
+@using HGShare.VWModel
+@using Webdiyer.WebControls.Mvc
+@model PagedList<RoleVModel>
+@{
+    ViewBag.Title = "Role列表";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>角色列表</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form action="@Url.Action("Index", "Roles")" method="GET">
+                        <div class="row">
+                            <div class="col-sm-5 m-b-xs">
+                                <div class="btn-group hidden-xs" role="group">
+                                    <a href="@Url.Action("Add","Roles")" class="btn btn-outline btn-default">
+                                        <i class="fa fa-pencil-square" aria-hidden="true"></i> 添加
+                                    </a> 
+                                    <button class="btn btn-default btn-outline" type="button" name="refresh" title="刷新" id="pagereload">
+                                        <i class="fa fa-refresh"></i> 刷新
+                                    </button> 
+                                    <button type="button" class="btn btn-outline btn-default" id="deletessubmit">
+                                        <i class="fa fa-trash" aria-hidden="true"></i> 删除
+                                    </button> 
+                                </div>
+                                </div>
+                            <div class="col-sm-4 m-b-xs">
+                                <!--其它搜索条件-->
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <input type="hidden" name="page" value="1" />
+                                    <input type="text" placeholder="请输入关键词" class="input-sm form-control">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-sm btn-primary"> 搜索</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="checkbox checkbox-inline checkbox-primary">
+                                            <input type="checkbox" value="0" id="selectdeleteitem" />
+                                            <label for="selectdeleteitem"></label>
+                                        </div>
+                                    </th>
+                                    <th>角色名</th>
+                                    <th>添加时间</th>
+                                    <th>是否禁用</th>
+                                    <th>是否是超级角色</th>
+                                    <th>发帖是否需要审核</th>
+                                    <th>评论是否需要审核</th>
+                                    <th>描述</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (RoleVModel item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox checkbox-inline checkbox-primary">
+                                                <input type="checkbox" value="@item.Id" id="deleteitem_@item.Id" name="deleteitem" />
+                                                <label for="deleteitem_@item.Id"></label>
+                                            </div>
+                                        </td>
+
+                                        <td>@item.RName</td>
+                                        <td>@item.CreateTime</td>
+                                        <td>
+                                            <span class="label label-@(item.IsDel ? "success" : "default")">@(item.IsDel ? "是" : "否")</span>
+                                        </td>
+                                        <td>
+                                            <span class="label label-@(item.IsSuper ? "success" : "default")">@(item.IsSuper ? "是" : "否")</span>
+                                        </td>
+                                        <td>
+                                            <span class="label label-@(item.ArticleNeedVerified ? "success" : "default")">@(item.ArticleNeedVerified ? "是" : "否")</span>
+                                        </td>
+                                        <td>
+                                            <span class="label label-@(item.CommentNeedVerified ? "success" : "default")">@(item.CommentNeedVerified ? "是" : "否")</span>
+                                        </td>	
+                                        <td>@item.Description</td>	
+                                        <td>
+                                            <a class="btn btn-info btn-sm" href="@Url.Action("Edit","Roles")?Id=@item.Id"><i class="fa fa-paste"></i> 编辑</a>
+                                            <button class="btn btn-warning btn-sm delete_btn" type="button" data-id="@item.Id">
+                                                <i class="fa fa-warning"></i> <span class="bold">删除</span>
+                                            </button>
+                                            <a class="btn btn-success btn-sm" href="@Url.Action("AllocationModul", "Roles")?Id=@item.Id">
+                                                <span class="bold">分配资源</span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="dataTables_info">共 @Model.TotalItemCount 项 @Model.TotalPageCount 页，当前第 @Model.CurrentPageIndex 页</div>
+        </div>
+        <div class="col-sm-6">
+            <div class="dataTables_paginate paging_simple_numbers">
+                <ul class="pagination">
+                    @Html.Pager(Model, PageConfig.BackstageOptions)
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_footer
+{
+    <script type="text/javascript">
+        $(function () {
+            /*通用删除操作*/
+            ListTools.Delete.Init({ url: "@Url.Action("Delete","Roles")", btn: ".delete_btn" });
+            /*通用多选删除操作*/
+            ListTools.Deletes.Init({ url: "@Url.Action("Deletes","Roles")", btn: "#deletessubmit", itemname: "deleteitem" });
+            /*删除选择操作*/
+            ListTools.DeleteSelectBox.Init({ btn: "#selectdeleteitem", itemname: "deleteitem" });
+            /*刷新操作*/
+            ListTools.PageReload.Init({ btn: "#pagereload" });
+        })
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+

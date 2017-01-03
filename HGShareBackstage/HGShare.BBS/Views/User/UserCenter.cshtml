@@ -1,0 +1,183 @@
+﻿@model HGShare.BBS.Models.UserCenterEntity
+@{
+    var user = Model.User;
+
+    ViewBag.Title = user.NickName??user.Name;
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    
+}
+
+<div class="main layui-clear">
+    <h2 class="page-title">用心中心</h2>
+    <div class="wrap">
+        <div class="content">
+            @if (!user.EmailStatus)
+            {
+                <div class="fly-msg">您的邮箱尚未验证，这比较影响您的帐号安全，<a href="@Url.Action("activate", "user")">立即去激活？</a>
+                </div>
+            }
+            <div class="fly-tab user-tab">
+                <span id="LAY-mine">
+                    <a href="javascript:;" class="usercenter-tab tab-this" type="mine-article">我的文章（<cite>@user.ArticleNum</cite>）</a>
+                    <a href="javascript:;" class="usercenter-tab" type="mine-comment">我的回复（<cite>@user.CommentNum</cite>）</a>
+                    @*<a href="message.html">我的消息</a>*@
+                    <a href="@Url.Action("Home", "User", new {id = user.Id})">我的主页</a>
+                </span>
+            </div>
+            <div class="user-mine">
+                <ul class="mine-view jie-row" style="display: block;" id="my-content">
+                    
+                </ul>
+            </div>
+            <div id="lay-page"></div>
+        </div>
+    </div>
+
+    <div class="edge">
+        <div class="user-about">
+            <a href="@Url.Action("UserSet", "User")#avatar" title="修改头像">
+                <img class="user-avatar" alt="@(user.NickName ?? user.Name)" src="@HGShare.Site.Tools.GenerateAvatar(user.Avatar, user.Sex)">
+            </a>
+            <p>
+                <span style="color: #333">@(user.NickName ?? user.Name)</span>
+                <span style="color: #5FB878;">@user.RName</span>
+                <!-- <span style="color:#5FB878;">管理员</span> -->
+            </p>
+            <p>
+                <span>加入时间：@user.CreateTime.ToString("yyyy-MM-dd HH:ss:mm")</span>
+                <span>
+                    @HGShare.Site.Config.WebSysConfig.ScoreName：<em style="color: #FF7200">@user.Score</em>
+                </span>
+            </p>
+            <p>
+
+                @if (Model.Positions != null && Model.Positions.Count > 0)
+                {
+                    string citys = string.Join("-", Model.Positions.OrderBy(n => n.Code).Select(n => n.Name).ToArray());
+                    <span>
+                        城市：@(citys ?? "--")
+                    </span>
+                }
+                <span>性别：@(user.Sex == 1 ? "男" : "女")</span>
+            </p>
+
+            @*<div class="user-looklog" style="padding-bottom:200px;">
+                <h3>最近访客</h3>
+                <span>
+                    <a href="/u/168">
+                        <img src="http://fly.layui.com/avatar/168.jpg">
+                        <cite>贤心</cite>
+                        <i>刚刚</i>
+                    </a>
+                    <a href="/u/336">
+                        <img src="http://res.layui.com/images/fly/avatar/00.jpg">
+                        <cite>Fly官方</cite>
+                        <i>5分钟前</i>
+                    </a>
+                    <a href="/u/26880">
+                        <img src="http://res.layui.com/images/fly/avatar/5.jpg">
+                        <cite>小付</cite>
+                        <i>1小时前</i>
+                    </a>
+                    <a href="/u/11928">
+                        <img src="http://fly.layui.com/avatar/11928.jpg">
+                        <cite>第一把菜刀</cite>
+                        <i>3天前</i>
+                    </a>
+                </span>
+            </div>*@
+        </div>
+    </div>
+</div>
+<script type="text/html" id="article-template">
+    {{# layui.each(d, function(index, item){ }}
+    <li>
+        {{# if(item.State===1){ }}
+        <span class="jie-status jie-status-ok">已审核</span>
+        {{# }else if(item.State===2){ }}
+        <span class="jie-status jie-status-no">未通过</span>
+        {{# }else if(item.State===0){ }}
+        <span class="jie-status jie-status-ing">审核中</span>
+        {{# } }}
+        <a class="jie-title" href="javascript:;" data-href="@Url.Action("detail", "article",new{aid=0})" data-id="{{ item.Id }}" target="_blank">{{ item.Title }}</a> <i>{{ layui.tools.jsonvalue2date(item.CreateTime)}}</i>
+        <a class="mine-edit" href="javascript:;" data-href="@Url.Action("edit","article",new {id=0})" data-id="{{ item.Id }}">编辑</a> <em>{{ item.Dot }}阅/{{ item.CommentNum }}答</em>
+    </li>
+    {{# }); }}
+</script>
+<script type="text/html" id="comment-template">
+    {{# layui.each(d, function(index, item){ }}
+    <li>
+        <p>
+            {{# if(item.State===1){ }}
+            <span class="jie-status jie-status-ok">已审核</span>
+            {{# }else if(item.State===2){ }}
+            <span class="jie-status jie-status-no">未通过</span>
+            {{# }else if(item.State===0){ }}
+            <span class="jie-status jie-status-ing">审核中</span>
+            {{# } }}
+            <span>{{ layui.tools.jsonvalue2date(item.CreateTime) }}</span>      在
+            <a href="javascirpt:;" data-href="@Url.Action("detail", "article",new{aid=0})" data-id="{{ item.AId }}" target="_blank">{{ item.ArticleTitle }}</a>中回答：
+        </p>
+        <div class="home-dacontent" style="display: block;">
+            {{ item.Content }}
+        </div>
+    </li>
+    {{# }); }}
+</script>
+@section main_back_Script
+{
+    <script type="text/javascript">
+        
+        layui.use(['ajaxdatagrid'], function () {
+            var $ = layui.jquery;
+            //回调，设置所有a标签的地址
+            var callback=function(){
+                $('#my-content').find('a').each(function(i,item){
+                    var urltemplate=$(item).attr('data-href');
+                    var id=$(item).attr('data-id');
+
+                    urltemplate && $(item).attr('href', urltemplate.replace('0', id));
+                   
+                });
+                $("html, body").animate({
+                    scrollTop: $('.page-title').offset().top + "px"
+                });
+            };
+            var ajax_options = {
+                datalist_api : '@Url.Action("MyArticles", "User")',
+                datalist_opt : {},
+                datacount_api : '@Url.Action("MyArticlesCount", "User")',
+                datacount_opt : {}
+            };
+            var other_options = {
+                datatemplate : '#article-template',
+                datagridbox : '#my-content'
+            };
+            layui.ajaxdatagrid.Init({},ajax_options,other_options,callback);//初始化
+            $(".usercenter-tab").on("click", function () {
+                $(this).addClass('tab-this').siblings().removeClass('tab-this');
+                var ajaxoptions={},otheroptions={};
+                var type = $(this).attr('type');
+                if (type == 'mine-article') {
+                    ajaxoptions=ajax_options;
+                    otheroptions=other_options;
+                }else if (type == 'mine-comment'){
+                    ajaxoptions = {
+                        datalist_api : '@Url.Action("MyComments", "User")',
+                        datalist_opt : {},
+                        datacount_api : '@Url.Action("MyCommentsCount", "User")',
+                        datacount_opt : {}
+                    };
+                    otheroptions = {
+                        datatemplate : '#comment-template',
+                        datagridbox : '#my-content'
+                    };
+                }
+                layui.ajaxdatagrid.Init({}, ajaxoptions, otheroptions, callback);
+            });
+        });
+    </script>
+}
+
+
+

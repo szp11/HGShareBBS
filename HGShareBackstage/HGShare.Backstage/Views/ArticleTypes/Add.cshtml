@@ -1,0 +1,207 @@
+﻿@using HGShare.Site
+@model HGShare.VWModel.ArticleTypeVModel
+@{
+    ViewBag.Title = "添加文章类型";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>添加ArticleType</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @using (Html.BeginForm("Add", "ArticleTypes", FormMethod.Post, new { @class = "form-horizontal", id = "addform" }))
+                    {
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">类型名</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Name, new { @class = "form-control", @placeholder = "请输入类型名" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Name)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">类型父级</label>
+                            <div class="col-sm-5">
+                                @Html.HiddenFor(n => n.PId, new { @class = "form-control", @placeholder = "" })
+                                <div class="input-group">
+                                    @Html.TextBoxFor(n => n.PName, new { @class = "form-control", @placeholder = "请选择父级类型", @readonly = "readonly" })
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" id="selectparentbtn">
+                                            选择
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.PId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">排序</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Sort, new { @class = "form-control", @placeholder = "请输入排序" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Sort)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">拼音</label>
+                            <div class="col-sm-5">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(n => n.PinYin, new { @class = "form-control", @placeholder = "请输入拼音" })
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" id="getpinyinbtn">
+                                            生成
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.PinYin)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否是主页菜单</label>
+                            <div class="col-sm-5">
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsHomeMenu, true, new { id = "IsHomeMenu1" })
+                                    <label for="IsHomeMenu1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsHomeMenu, false, new { id = "IsHomeMenu2" })
+                                    <label for="IsHomeMenu2">
+                                        否
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.IsHomeMenu)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">前台图标</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Ico, new { @class = "form-control", @placeholder = "请输入前台图标" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Ico)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">前台发布时可选</label>
+                            <div class="col-sm-5">
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsShow, true, new { id = "IsShow1" })
+                                    <label for="IsShow1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsShow, false, new { id = "IsShow2" })
+                                    <label for="IsShow2">
+                                        否
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.IsShow)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                @Html.HiddenFor(n => n.Id)
+                                <button class="btn btn-primary" type="submit" id="submit">保存内容</button>
+                                <button class="btn btn-white" type="button" onclick="window.history.back(-1);">取消</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_footer
+{
+    <!--表单验证-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.js?v=1.35")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.unobtrusive.js?v=1.40")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/jquery.form.js")"></script>
+    <script type="text/javascript">
+        ValidataTools.Init({
+            backurl: "@Url.Action("Index", "ArticleTypes")",
+            form: $("#addform"),
+            submitbtn: $("#submit"),
+            btntext: "保存内容",
+            tipstype: "添加"
+        });
+        /*选择父级模块(该弹框是在父级打开)*/
+        $("#selectparentbtn,#PName").on("click", function() {
+            $.get("@Url.Action("ArticleTypeSelect", "ArticleTypes")", { callback: "selectCallback", id: @Model.Id, pid: $("#PId").val() }, function(html) {
+                //自定页
+                var layerid = layer.open({
+                    title: "选择功能文章类型",
+                    area: ['300px', '500px'],
+                    type: 1,
+                    shift: 2,
+                    shadeClose: true, //开启遮罩关闭
+                    content: html,
+                    btn: ['关闭']
+                });
+            });
+        });
+
+        /*点击模块选择时触发(因为是父级页面调用，所以回填对象是当前窗口的，在父级会获取到)*/
+        function selectCallback(thiswindow, id, name) {
+            if (thiswindow) {
+                $(thiswindow.document.getElementById("PId")).val(id);
+                $(thiswindow.document.getElementById("PName")).val(name);
+                //SetOrderId(id);
+            }
+        }
+
+/*选择父级后设置排序字段*/
+        @*function SetOrderId(pid) {
+            $.post("@Url.Action("GetOrderNumber", "Moduls")", { pid: pid }, function(result) {
+                if (result && result.ResultState)
+                    $("#OrderId").val(result.Body);
+            });
+        }*@
+        /******输入完name  生成拼音*******/
+        function SetPinYin() {
+            var pinyin = $("#PinYin");
+            pinyin.addClass("disabled");
+            var name = $("#Name");
+            if (name.val()) {
+                $.get("@Url.Action("ConvertToPinYin", "ToolsApi")", { value: escape(name.val()) }, function(result) {
+                    pinyin.val(result.Body).removeClass("disabled");
+                });
+            }
+        }
+
+        $(function() {
+            $("#getpinyinbtn,#PinYin").click(SetPinYin);
+        });
+    </script>
+}
+

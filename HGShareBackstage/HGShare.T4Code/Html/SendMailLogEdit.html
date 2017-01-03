@@ -1,0 +1,186 @@
+@using HGShare.Site
+@model HGShare.VWModel.SendMailLogVModel
+@{
+    ViewBag.Title = "修改SendMailLog";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改SendMailLog</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @using(Html.BeginForm("Edit", "SendMailLogs", FormMethod.Post, new { @class = "form-horizontal",id="addform" }))
+                    {
+
+					 					 <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Id, new { @class = "form-control", @placeholder = "请输入" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Id)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">接收用户id</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.UserId, new { @class = "form-control", @placeholder = "请输入接收用户id" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.UserId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">发送用户Id</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.SendUserId, new { @class = "form-control", @placeholder = "请输入发送用户Id" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.SendUserId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">邮件模板Id</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.TemplateId, new { @class = "form-control", @placeholder = "请输入邮件模板Id" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.TemplateId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">接收人</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.ToEmail, new { @class = "form-control", @placeholder = "请输入接收人" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.ToEmail)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">发送人邮箱</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.FromEmail, new { @class = "form-control", @placeholder = "请输入发送人邮箱" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.FromEmail)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">邮件发送状态 0 未知 1成功 2 失败</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Status, new { @class = "form-control", @placeholder = "请输入邮件发送状态 0 未知 1成功 2 失败" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Status)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">邮件标题</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Title, new { @class = "form-control", @placeholder = "请输入邮件标题" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Title)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">邮件内容</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Body, new { @class = "form-control", @placeholder = "请输入邮件内容" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Body)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Ip, new { @class = "form-control", @placeholder = "请输入" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Ip)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">是否是系统邮件</label>
+                            <div class="col-sm-5">
+                                							   <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsSystem, true, new { id = "IsSystem1" })
+                                    <label for="IsSystem1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsSystem, false, new { id = "IsSystem2" })
+                                    <label for="IsSystem2">
+                                        否
+                                    </label>
+                                </div>
+							                               </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.IsSystem)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">发送时间</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.CreateTime, new { @class = "form-control", @placeholder = "请输入发送时间" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.CreateTime)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+								
+
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                @Html.HiddenFor(n=>n.Id)
+                                <button class="btn btn-primary" type="submit" id="submit">保存内容</button>
+                                <button class="btn btn-white" type="button" onclick="window.history.back(-1);">取消</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_footer
+{
+    <!--表单验证-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.js?v=1.35")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.unobtrusive.js?v=1.40")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/jquery.form.js")"></script>
+    <script type="text/javascript">
+        ValidataTools.Init({
+            backurl: "@Url.Action("Index", "SendMailLogs")",
+            form: $("#addform"),
+            submitbtn: $("#submit"),
+            btntext: "保存内容",
+            tipstype:"修改"
+        });
+    </script>
+}
+

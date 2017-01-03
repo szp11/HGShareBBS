@@ -1,0 +1,182 @@
+@using HGShare.Site
+@model HGShare.VWModel.RoleVModel
+@{
+    ViewBag.Title = "修改Role";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改Role</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @using(Html.BeginForm("Edit", "Roles", FormMethod.Post, new { @class = "form-horizontal",id="addform" }))
+                    {
+
+					 					 <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Id, new { @class = "form-control", @placeholder = "请输入" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Id)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">角色名</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.RName, new { @class = "form-control", @placeholder = "请输入角色名" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.RName)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">添加时间</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.CreateTime, new { @class = "form-control", @placeholder = "请输入添加时间" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.CreateTime)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">是否禁用</label>
+                            <div class="col-sm-5">
+                                							   <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsDel, true, new { id = "IsDel1" })
+                                    <label for="IsDel1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsDel, false, new { id = "IsDel2" })
+                                    <label for="IsDel2">
+                                        否
+                                    </label>
+                                </div>
+							                               </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.IsDel)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">描述</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Description, new { @class = "form-control", @placeholder = "请输入描述" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Description)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">是否是超级角色</label>
+                            <div class="col-sm-5">
+                                							   <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsSuper, true, new { id = "IsSuper1" })
+                                    <label for="IsSuper1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsSuper, false, new { id = "IsSuper2" })
+                                    <label for="IsSuper2">
+                                        否
+                                    </label>
+                                </div>
+							                               </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.IsSuper)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">发帖是否需要审核</label>
+                            <div class="col-sm-5">
+                                							   <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.ArticleNeedVerified, true, new { id = "ArticleNeedVerified1" })
+                                    <label for="ArticleNeedVerified1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.ArticleNeedVerified, false, new { id = "ArticleNeedVerified2" })
+                                    <label for="ArticleNeedVerified2">
+                                        否
+                                    </label>
+                                </div>
+							                               </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.ArticleNeedVerified)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">评论是否需要审核</label>
+                            <div class="col-sm-5">
+                                							   <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.CommentNeedVerified, true, new { id = "CommentNeedVerified1" })
+                                    <label for="CommentNeedVerified1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.CommentNeedVerified, false, new { id = "CommentNeedVerified2" })
+                                    <label for="CommentNeedVerified2">
+                                        否
+                                    </label>
+                                </div>
+							                               </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.CommentNeedVerified)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+								
+
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                @Html.HiddenFor(n=>n.Id)
+                                <button class="btn btn-primary" type="submit" id="submit">保存内容</button>
+                                <button class="btn btn-white" type="button" onclick="window.history.back(-1);">取消</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_footer
+{
+    <!--表单验证-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.js?v=1.35")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.unobtrusive.js?v=1.40")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/jquery.form.js")"></script>
+    <script type="text/javascript">
+        ValidataTools.Init({
+            backurl: "@Url.Action("Index", "Roles")",
+            form: $("#addform"),
+            submitbtn: $("#submit"),
+            btntext: "保存内容",
+            tipstype:"修改"
+        });
+    </script>
+}
+

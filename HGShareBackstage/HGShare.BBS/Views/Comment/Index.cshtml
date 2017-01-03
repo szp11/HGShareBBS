@@ -1,0 +1,18 @@
+﻿@using HGShare.BBS.Models.Search
+@using Webdiyer.WebControls.Mvc
+@model PagedList<HGShare.BBS.Models.CommentEntity>
+
+<ul class="jieda" id="comments">
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var commentUser in Model)
+        {
+            @(Html.Action("comment", "comment", commentUser))
+        }
+    }
+    else
+    {
+        <li class="fly-none none-comment">还没有任何回答，赶快回复吧</li>
+    }
+</ul>
+@Html.Pager(Model, HGShare.Site.Config.PageConfig.WebCommentPageOptions)

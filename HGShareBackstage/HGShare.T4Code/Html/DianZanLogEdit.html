@@ -1,0 +1,156 @@
+@using HGShare.Site
+@model HGShare.VWModel.DianZanLogVModel
+@{
+    ViewBag.Title = "修改DianZanLog";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改DianZanLog</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @using(Html.BeginForm("Edit", "DianZanLogs", FormMethod.Post, new { @class = "form-horizontal",id="addform" }))
+                    {
+
+					 					 <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Id, new { @class = "form-control", @placeholder = "请输入" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Id)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">主体Id</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.MId, new { @class = "form-control", @placeholder = "请输入主体Id" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.MId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">次级主键Id</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.CId, new { @class = "form-control", @placeholder = "请输入次级主键Id" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.CId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">用户Id</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.UserId, new { @class = "form-control", @placeholder = "请输入用户Id" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.UserId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">Ip</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Ip, new { @class = "form-control", @placeholder = "请输入Ip" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Ip)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">是否取消</label>
+                            <div class="col-sm-5">
+                                							   <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsCancel, true, new { id = "IsCancel1" })
+                                    <label for="IsCancel1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsCancel, false, new { id = "IsCancel2" })
+                                    <label for="IsCancel2">
+                                        否
+                                    </label>
+                                </div>
+							                               </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.IsCancel)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.CancelTime, new { @class = "form-control", @placeholder = "请输入" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.CancelTime)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">类型 1文章 2评论</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Type, new { @class = "form-control", @placeholder = "请输入类型 1文章 2评论" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Type)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">创建时间</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.CreateTime, new { @class = "form-control", @placeholder = "请输入创建时间" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.CreateTime)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+								
+
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                @Html.HiddenFor(n=>n.Id)
+                                <button class="btn btn-primary" type="submit" id="submit">保存内容</button>
+                                <button class="btn btn-white" type="button" onclick="window.history.back(-1);">取消</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_footer
+{
+    <!--表单验证-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.js?v=1.35")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.unobtrusive.js?v=1.40")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/jquery.form.js")"></script>
+    <script type="text/javascript">
+        ValidataTools.Init({
+            backurl: "@Url.Action("Index", "DianZanLogs")",
+            form: $("#addform"),
+            submitbtn: $("#submit"),
+            btntext: "保存内容",
+            tipstype:"修改"
+        });
+    </script>
+}
+

@@ -1,0 +1,45 @@
+﻿@model List<HGShare.VWModel.TreeVModel>
+@using HGShare.Site
+@using Newtonsoft.Json
+@{
+    Layout = null;
+    int selectedid = ViewBag.SelectedId ?? -1;
+}
+<!--树-->
+<link href="@Url.StaticFile("~/hplus/css/plugins/jsTree/style.min.css")" rel="stylesheet" />
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div id="using_json">
+        </div>
+    </div>
+</div>
+<!--树-->
+<script type="text/javascript" src="@Url.StaticFile("~/hplus/js/plugins/jsTree/jstree.min.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var tree = $("#using_json").jstree({
+            "core": {
+                "multiple": false,
+                "data": @Html.Raw(JsonConvert.SerializeObject(Model))
+            },
+            "checkbox": {
+                "keep_selected_style": true, //是否显示节点的选中样
+                "three_state":false//选择时是否保持其它选择
+            },
+            "plugins": ["checkbox"]
+        }).on('click.jstree', function(event) {
+            //点击
+        }).on('changed.jstree', function(e, data) {
+            //选中
+            var id = data.instance.get_node(data.selected[0]).li_attr.data_id;
+            var name = data.instance.get_node(data.selected[0]).li_attr.data_name;
+            var iframe = tabTools.GetCurrentTab();
+            if (iframe["selectCallback"]) {
+                iframe["selectCallback"](iframe, id, name);
+            }
+        }).on('ready.jstree',function() {
+            /*修改时，默认选中已选模块*/
+            tree.jstree().select_node(["tree_node_@(selectedid)"]);
+        });
+    });
+</script>

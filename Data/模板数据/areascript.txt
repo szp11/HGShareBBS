@@ -1,0 +1,22 @@
+var areas=layui.areas;
+var sqls = [];
+for (var i = 0; i < areas.length; i++) {
+
+	var a = areas[i];
+	sqls.push("insert into Area(Name,Code,PinYin,SortPinYin,Sort)values('" + a.provinceName + "','" + a.provinceCode + "','','','')");
+	if (a && a.mallCityList && a.mallCityList.length > 0) {
+		for (var j = 0; j < a.mallCityList.length; j++) {
+			var c = a.mallCityList[j];
+			sqls.push("insert into Area(Name,Code,PinYin,SortPinYin,Sort,ParentCode)values('" + c.cityName + "','" + c.cityCode + "','','','','" + a.provinceCode + "')");
+			if (c && c.mallAreaList && c.mallAreaList.length > 0) {
+				for (var m = 0; m < c.mallAreaList.length; m++) {
+					var s = c.mallAreaList[m];
+					sqls.push("insert into Area(Name,Code,PinYin,SortPinYin,Sort,ParentCode)values('" + s.areaName + "','" + s.areaCode + "','','','','" + c.cityCode + "')");
+
+				}
+			}
+
+		}
+	}
+}
+sqls.join('')

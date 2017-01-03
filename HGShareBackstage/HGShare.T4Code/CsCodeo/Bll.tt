@@ -1,0 +1,174 @@
+﻿<#@ template debug="false" hostspecific="True" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Data.dll" #>
+<#@ assembly name="System.Data.DataSetExtensions.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ include file="$(ProjectDir)\ProjectInit.ttinclude"  #>
+<# 
+	var manager = Manager.Create(Host, GenerationEnvironment); 
+	var tables=new DbHelper(Settings.DBConfig);
+#>
+<# foreach(DbTable table in tables.GetDbTables())  { #>
+<# manager.StartHeader(); #>
+<#
+	    manager.StartNewFile(table.TableName+"sBll.cs");//开始输出文件
+
+		List<DbColumn> columns= tables.GetDbColumns(table.OldTableName);
+		//得到主键信息
+		DbColumn primaryKeyCol=DbHelper.GetPrimaryKey(columns);
+		string pk=primaryKeyCol==null?"Id":primaryKeyCol.ColumnName;
+		string oldType=primaryKeyCol==null?"int":primaryKeyCol.ColumnType;
+		string pktype=primaryKeyCol==null?"int":SqlServerDbTypeMap.MapCsharpType(primaryKeyCol.ColumnType);
+#>
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using HGShare.Model;
+using HGShare.VWModel;
+namespace <#=Settings.BaseNamespace#>.Business
+{    
+	/// <summary>
+    /// <#=table.TableName#> 
+    /// </summary>
+    public class <#=table.TableName#>s
+    {
+
+		/// <summary>
+		/// 添加<#=table.TableName#>Info
+		/// </summary>
+		/// <param name="<#=table.TableName.ToLower()#>"></param>
+		/// <returns></returns>
+		public static <#=pktype#> Add<#=table.TableName#>(<#=table.TableName#>Info <#=table.TableName.ToLower()#>)
+		{
+			return DataProvider.<#=table.TableName#>s.Add<#=table.TableName#>(<#=table.TableName.ToLower()#>);
+		}
+		/// <summary>
+       /// 修改<#=table.TableName#>Info
+       /// </summary>
+       /// <param name="<#=table.TableName.ToLower()#>"></param>
+       /// <returns></returns>
+       public static int Update<#=table.TableName#>(<#=table.TableName#>Info <#=table.TableName.ToLower()#>)
+       {
+           return DataProvider.<#=table.TableName#>s.Update<#=table.TableName#>(<#=table.TableName.ToLower()#>);
+       }
+		/// <summary>
+		/// 根据<#=pk.ToLower()#>获取<#=table.TableName#>Info
+		/// </summary>
+		/// <param name="<#=pk.ToLower()#>"></param>
+		/// <returns></returns>
+		public static <#=table.TableName#>Info Get<#=table.TableName#>Info(<#=pktype+" "+pk.ToLower()#>)
+		{
+			return DataProvider.<#=table.TableName#>s.Get<#=table.TableName#>Info(<#=pk.ToLower()#>);
+		}
+		/// <summary>
+		/// 根据<#=pk.ToLower()#>删除<#=table.TableName#>
+		/// </summary>
+		/// <param name="<#=pk.ToLower()#>"></param>
+		/// <returns></returns>
+		public static Int32 Delete<#=table.TableName#>(<#=pktype+" "+pk.ToLower()#>)
+		{
+			return DataProvider.<#=table.TableName#>s.Delete<#=table.TableName#>(<#=pk.ToLower()#>);
+		}
+		/// <summary>
+		/// 根据<#=pk.ToLower()#>s删除<#=table.TableName#>多条记录
+		/// </summary>
+		/// <param name="<#=pk.ToLower()#>s"></param>
+		/// <returns></returns>
+		public static Int32 Delete<#=table.TableName#>s(<#=pktype+"[] "+pk.ToLower()#>s)
+		{
+			return DataProvider.<#=table.TableName#>s.Delete<#=table.TableName#>s(<#=pk.ToLower()#>s);
+		}
+		/// <summary>
+       /// 获取<#=table.TableName#>分页列表(自定义存储过程)
+       /// </summary>
+       /// <param name="pageIndex">页码</param>
+       /// <param name="pageSize">每页显示条数</param>
+       /// <param name="beginTime">开始时间</param>
+       /// <param name="endTime">结束时间</param>
+       /// <param name="recordCount">总记录数</param>
+       /// <returns><#=table.TableName#>列表</returns>
+       public static List<<#=table.TableName#>Info> Get<#=table.TableName#>PageList(int pageIndex, int pageSize, DateTime? beginTime, DateTime? endTime, out int recordCount)
+       {
+           return DataProvider.<#=table.TableName#>s.Get<#=table.TableName#>PageList(pageIndex,pageSize,beginTime,endTime, out recordCount);
+       }
+	   /// <summary>
+       /// 获取<#=table.TableName#>分页列表(分页存储过程)
+       /// </summary>
+       /// <param name="pageIndex">页码</param>
+       /// <param name="pageSize">每页显示条数</param>
+       /// <param name="beginTime">开始时间</param>
+       /// <param name="endTime">结束时间</param>
+       /// <param name="pageCount">页数</param>
+       /// <param name="count">总记录数</param>
+       /// <returns><#=table.TableName#>列表</returns>
+       public static List<<#=table.TableName#>Info> Get<#=table.TableName#>PageList(int pageIndex, int pageSize, DateTime? beginTime,
+           DateTime? endTime, out int pageCount, out int count)
+       {
+           return DataProvider.<#=table.TableName#>s.Get<#=table.TableName#>PageList(pageIndex,pageSize,beginTime,endTime, out pageCount, out count);
+       }
+	   #region 实体转换
+	   /// <summary>
+       /// DataModel 转 ViewModel
+       /// </summary>
+       /// <param name="<#=table.TableName.ToLower()#>"></param>
+       /// <returns></returns>
+       public static <#=table.TableName#>VModel <#=table.TableName#>InfoToVModel(<#=table.TableName#>Info <#=table.TableName.ToLower()#>)
+       {
+           if(<#=table.TableName.ToLower()#>==null)
+               return new <#=table.TableName#>VModel();
+           return new <#=table.TableName#>VModel
+           {
+				<# foreach(DbColumn column in columns){ #>
+<#=column.ColumnName#>=<#=table.TableName.ToLower()#>.<#=column.ColumnName#><#if(column.ColumnID<columns.Max(n=>n.ColumnID)){#>,<#}#>
+
+			   <#}#>
+           };
+       }
+       /// <summary>
+       /// DataModels 转 ViewModels
+       /// </summary>
+       /// <param name="<#=table.TableName.ToLower()#>Infos"></param>
+       /// <returns></returns>
+       public static List<<#=table.TableName#>VModel> <#=table.TableName#>InfosToVModels(List<<#=table.TableName#>Info> <#=table.TableName.ToLower()#>Infos)
+       {
+           return <#=table.TableName.ToLower()#>Infos.Select(<#=table.TableName#>InfoToVModel).ToList();
+       }
+       /// <summary>
+       /// ViewModel 转 DataModel
+       /// </summary>
+       /// <param name="<#=table.TableName.ToLower()#>"></param>
+       /// <returns></returns>
+       public static <#=table.TableName#>Info <#=table.TableName#>VModelToInfo(<#=table.TableName#>VModel <#=table.TableName.ToLower()#>)
+       {
+           if (<#=table.TableName.ToLower()#> == null)
+               return new <#=table.TableName#>Info();
+           return new <#=table.TableName#>Info
+           {
+              <# foreach(DbColumn column in columns){ #>
+<#=column.ColumnName#>=<#=table.TableName.ToLower()#>.<#=column.ColumnName#><#if(column.ColumnID<columns.Max(n=>n.ColumnID)){#>,<#}#>
+
+			   <#}#>
+           };
+       }
+	   /// <summary>
+       /// ViewModels 转 DataModels
+       /// </summary>
+       /// <param name="<#=table.TableName.ToLower()#>VModels"></param>
+       /// <returns></returns>
+       public static List<<#=table.TableName#>Info> <#=table.TableName#>VModelsToInfos(List<<#=table.TableName#>VModel> <#=table.TableName.ToLower()#>VModels)
+       {
+           return <#=table.TableName.ToLower()#>VModels.Select(<#=table.TableName#>VModelToInfo).ToList();
+       }
+	   #endregion
+    }
+}
+<#
+	manager.EndBlock();//结束输出
+}
+manager.Process(true);
+#>

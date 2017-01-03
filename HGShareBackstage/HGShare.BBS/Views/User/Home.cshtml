@@ -1,0 +1,104 @@
+﻿@using HGShare.Common
+@using HGShare.Site
+@using HGShare.Site.Config
+@using HGShare.VWModel
+@using Webdiyer.WebControls.Mvc
+@model HGShare.BBS.Models.HomeEntity
+@{
+    UserVModel user = Model.User;
+    UserOtherVModel userOther = Model.UserOther;
+
+    string displayName = (user.NickName ?? user.Name);
+    ViewBag.Title = displayName + "-主页";
+    ViewBag.BodyClass = "fly-full";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@*<div class="fly-home" style="background-image: url();">
+        <img src="@HGShare.Site.Tools.GenerateAvatar(user.Avatar, user.Sex)" alt="@(user.NickName ?? user.Name)">
+        <h1>
+            @(displayName)
+            <i class="iconfont icon-@(user.Sex == 1 ? "nan" : "nv")"></i>
+            <!-- <i class="iconfont icon-nv"></i> -->
+            <!-- <span style="color:#c00;">（超级码农）</span>
+            <span style="color:#5FB878;">（活雷锋）</span>
+            <span>（该号已被封）</span> -->
+        </h1>
+        <div class="layui-main">
+            <p style="display: inline-block; max-width: 800px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #999; margin-top: 10px;">
+                @(userOther != null ? userOther.PersonalityIntroduce ?? "这个人懒得留下签名" : "这个人懒得留下签名")
+            </p>
+        </div>
+        <!--<div class="fly-sns">
+            <span lay-event="">添加好友</span>
+        </div>-->
+    </div>*@
+<div class="fly-home" style="/*background-image: url();*/">
+    <img src="@Tools.GenerateAvatar(user.Avatar, user.Sex)" alt=" @(displayName) ">
+    <h1>@(displayName) <i class="iconfont icon-@(user.Sex == 1 ? "nan" : "nv")"></i> <span style="color: #FF7200;">@user.RName</span>          </h1>
+    <p class="fly-home-info">
+        <i class="iconfont icon-zuichun" title="飞吻"></i><span style="color: #FF7200;">@(user.Score)@WebSysConfig.ScoreName</span>
+        <i class="iconfont icon-shijian"></i><span>@user.CreateTime.ToString("yyyy-MM-dd") 加入</span>
+        @if (Model.Positions != null && Model.Positions.Count > 0)
+        {
+            string citys = string.Join("-", Model.Positions.OrderBy(n => n.Code).Select(n => n.Name).ToArray());
+            <i class="iconfont icon-chengshi"></i>
+            <span>来自 @(citys ?? "--")</span>
+        }
+    </p>
+    <p class="fly-home-sign">（@(userOther != null ? userOther.PersonalityIntroduce ?? "这个人懒得留下签名" : "这个人懒得留下签名")）</p>
+</div>
+
+
+<div class="main fly-home-main">
+    <div class="layui-inline fly-home-jie">
+        <h2 class="page-title">@displayName 最近的文章</h2>
+        <ul class="jie-row">
+            @if (Model.Articles != null && Model.Articles.Count > 0)
+            {
+                foreach (var articleVModel in Model.Articles)
+                {
+                    <li>
+                        @if (articleVModel.IsJiaJing)
+                        {
+                            <span class="fly-jing">精</span>
+                        }
+                        <a href="@Url.Action("Detail", "Article", new { aid = articleVModel.Id })" class="jie-title">@articleVModel.Title</a>
+                        <i>@DatetimeTools.DateStringFromNow(articleVModel.CreateTime)</i>
+                        <em>@(articleVModel.Dot)阅/@(articleVModel.CommentNum)答</em>
+                    </li>
+                }
+
+            }
+            else
+            {
+                <li class="fly-none" style="height: auto; min-height: 50px; padding: 30px 0;"><i style="font-size: 14px;">没有发表任何内容</i></li>
+            }
+        </ul>
+        @Html.Pager(Model.Articles, PageConfig.UserHomeArticlePageOptions)
+    </div>
+    <div class="layui-inline fly-home-da">
+        <h2 class="page-title">@displayName 最近的回答</h2>
+        <ul class="home-jieda">
+            @if (Model.Comments != null && Model.Comments.Count > 0)
+            {
+                foreach (var commentVModel in Model.Comments)
+                {
+                    <li>
+                        <p>
+                            <span>@DatetimeTools.DateStringFromNow(commentVModel.CreateTime)</span>      在
+                            <a href="@Url.Action("Detail", "Article", new { aid = commentVModel.AId })#comment-@(commentVModel.Id)" target="_blank">@commentVModel.ArticleTitle</a>中回答：
+                        </p>
+                        <div class="home-dacontent">
+                            @Html.Raw(commentVModel.Content) 
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="fly-none" style="height: auto; min-height: 50px; padding: 30px 0;"><i style="font-size: 14px;">没有发表任何内容</i></li>
+            }
+        </ul>
+        @Html.Pager(Model.Comments, PageConfig.UserHomeCommentPageOptions)
+    </div>
+</div>

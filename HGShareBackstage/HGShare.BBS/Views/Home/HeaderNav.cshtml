@@ -1,0 +1,13 @@
+﻿@model List<HGShare.VWModel.ArticleTypeVModel>
+@{
+    int currentId = ViewBag.HeadNavCurrent ?? 0;
+}
+<div class="nav">
+    @foreach (var nav in Model)
+    {
+        <a class="@(nav.Id==currentId?"nav-this":"")" href="@Url.Action("Index", "Article", new { type = nav.Id })">
+            @if (!string.IsNullOrEmpty(nav.Ico)){@Html.Raw(nav.Ico)}@nav.Name
+        </a>
+    }
+    
+</div>

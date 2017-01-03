@@ -1,0 +1,14 @@
+﻿@model List<HGShare.VWModel.ArticleVModel>
+@if (Model != null && Model.Count > 0)
+{
+    <h3 class="page-title">最近热帖</h3>
+    <ol class="fly-list-one">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="@Url.Action("Detail","Article",new{aid=item.Id})">@item.Title</a>
+                <span><i class="iconfont">&#xe60b;</i> @item.Dot</span>
+            </li>
+        }
+    </ol>
+}

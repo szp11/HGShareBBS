@@ -1,0 +1,246 @@
+@using HGShare.Site
+@model HGShare.VWModel.AttachmentVModel
+@{
+    ViewBag.Title = "添加Attachment";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>添加Attachment</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @using(Html.BeginForm("Add", "Attachments", FormMethod.Post, new { @class = "form-horizontal",id="addform" }))
+                    {
+
+					 					 <div class="form-group">
+                            <label class="col-sm-3 control-label">附件Id</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Id, new { @class = "form-control", @placeholder = "请输入附件Id" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Id)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">文件存储名</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.FileName, new { @class = "form-control", @placeholder = "请输入文件存储名" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.FileName)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">文件原名</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.FileTitle, new { @class = "form-control", @placeholder = "请输入文件原名" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.FileTitle)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">描述</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Description, new { @class = "form-control", @placeholder = "请输入描述" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Description)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">文件类型</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Type, new { @class = "form-control", @placeholder = "请输入文件类型" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Type)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">img 宽</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Width, new { @class = "form-control", @placeholder = "请输入img 宽" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Width)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">img 高</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Height, new { @class = "form-control", @placeholder = "请输入img 高" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Height)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">文件大小</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.FileSize, new { @class = "form-control", @placeholder = "请输入文件大小" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.FileSize)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">是否显示0 不显示 1显示</label>
+                            <div class="col-sm-5">
+                               							   <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsShow, true, new { id = "IsShow1" })
+                                    <label for="IsShow1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.IsShow, false, new { id = "IsShow2" })
+                                    <label for="IsShow2">
+                                        否
+                                    </label>
+                                </div>
+							                               </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.IsShow)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">所属文章Id</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.AId, new { @class = "form-control", @placeholder = "请输入所属文章Id" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.AId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">文件来源（用于记录程序中各个上传口）</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Score, new { @class = "form-control", @placeholder = "请输入文件来源（用于记录程序中各个上传口）" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Score)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">状态 0 初始状态 1已审核通过 2审核未通过（用于文件审核）</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.State, new { @class = "form-control", @placeholder = "请输入状态 0 初始状态 1已审核通过 2审核未通过（用于文件审核）" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.State)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">用户Id</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.UserId, new { @class = "form-control", @placeholder = "请输入用户Id" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.UserId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">添加时间</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.InTime, new { @class = "form-control", @placeholder = "请输入添加时间" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.InTime)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">0附件 1图片</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.BType, new { @class = "form-control", @placeholder = "请输入0附件 1图片" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.BType)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">文件存储绝对路径（暂时无用）</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.LocalPath, new { @class = "form-control", @placeholder = "请输入文件存储绝对路径（暂时无用）" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.LocalPath)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">文件相对目录</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.VirtualPath, new { @class = "form-control", @placeholder = "请输入文件相对目录" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.VirtualPath)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">上传唯一标示(上传页面初始化后产生)</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Guid, new { @class = "form-control", @placeholder = "请输入上传唯一标示(上传页面初始化后产生)" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Guid)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+								
+
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                @Html.HiddenFor(n=>n.Id)
+                                <button class="btn btn-primary" type="submit" id="submit">保存内容</button>
+                                <button class="btn btn-white" type="button" onclick="window.history.back(-1);">取消</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_footer
+{
+    <!--表单验证-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.js?v=1.35")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.unobtrusive.js?v=1.40")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/jquery.form.js")"></script>
+    <script type="text/javascript">
+        ValidataTools.Init({
+            backurl: "@Url.Action("Index", "Attachments")",
+            form: $("#addform"),
+            submitbtn: $("#submit"),
+            btntext: "保存内容",
+            tipstype:"添加"
+        });
+    </script>
+}
+

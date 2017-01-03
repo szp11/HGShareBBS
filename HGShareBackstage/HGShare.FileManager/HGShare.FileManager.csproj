@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EB0686FC-D748-4F68-AF70-F74BB17148C9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HGShare.FileManager</RootNamespace>
+    <AssemblyName>HGShare.FileManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Avatar\UploadAvatar.cs" />
+    <Compile Include="FileCloudService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Dictionarys.cs" />
+    <Compile Include="FileInfo.cs" />
+    <Compile Include="FileTools.cs" />
+    <Compile Include="Upload\ImageHandle.cs" />
+    <Compile Include="Upload\Upload.cs" />
+    <Compile Include="Upload\UploadResultInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HGShare.Business\HGShare.Business.csproj">
+      <Project>{19e508f2-7283-49fc-86be-ece79df31d27}</Project>
+      <Name>HGShare.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Com.FileCloud\HGShare.Com.FileCloud.csproj">
+      <Project>{03bab53f-36bd-4c88-b51f-c1811bc5038d}</Project>
+      <Name>HGShare.Com.FileCloud</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Com.Interface\HGShare.Com.Interface.csproj">
+      <Project>{f588f257-f3e7-4d26-83c8-55fc1e895923}</Project>
+      <Name>HGShare.Com.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Common\HGShare.Common.csproj">
+      <Project>{df322a3a-30c6-424a-8436-7a3e25a2bcc8}</Project>
+      <Name>HGShare.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Container\HGShare.Container.csproj">
+      <Project>{ac88188c-fcc1-44dc-aa5b-52f1639d19e4}</Project>
+      <Name>HGShare.Container</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Enums\HGShare.Enums.csproj">
+      <Project>{5bd5f7ff-571d-41ad-81c5-010165367a11}</Project>
+      <Name>HGShare.Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Model\HGShare.Model.csproj">
+      <Project>{5b05e790-14c8-4fd2-a37e-4894b71e675d}</Project>
+      <Name>HGShare.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Site\HGShare.Site.csproj">
+      <Project>{e47810f2-aa92-4ad6-b9e0-3ca657e1ddb5}</Project>
+      <Name>HGShare.Site</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

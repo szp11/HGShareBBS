@@ -1,0 +1,123 @@
+﻿@using HGShare.VWModel
+@model HGShare.BBS.Models.ArticleWebEntity
+@{
+
+    var article = Model.Article;
+    var user = Model.User;
+    bool userIsLogin = ViewData["IsLogin"] != null && Convert.ToBoolean(ViewData["IsLogin"]);
+    UserVModel currentUser = ViewData["CurrentPartUserInfo"] == null ? null : (UserVModel)ViewData["CurrentPartUserInfo"];
+    ViewBag.Title = article.Title;
+
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+
+
+
+}
+<div class="main layui-clear">
+    <div class="wrap">
+        <div class="content detail">
+            <h1>@article.Title</h1>
+            <div class="fly-tip fly-detail-hint" data-id="@article.Id">
+                @if (article.IsStick)
+                {
+                    <span class="fly-tip-stick">置顶帖</span>
+                }
+                @if (article.IsJiaJing)
+                {
+                    <span class="fly-tip-jing">精帖</span>
+                }
+                <span>@article.TypeName</span>
+                @*<!-- <span class="fly-tip-jie">已采纳</span> -->
+                    <!-- <span class="jie-admin" type="del" style="margin-left: 20px;">删除</span>
+                    <span class="jie-admin" type="set" field="stick" rank="1">置顶</span>
+                    <span class="jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span>
+                    <span class="jie-admin" type="set" field="status" rank="1">加精</span>
+                    <span class="jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span> -->*@
+
+                <div class="fly-list-hint">
+                    <i class="iconfont" title="回答">&#xe60c;</i> <dynamic class="article_commentnum" data-id="@(article.Id)">@article.CommentNum</dynamic>
+                    <i class="iconfont" title="人气">&#xe60b;</i> <dynamic class="article_dot" data-id="@(article.Id)">@article.Dot</dynamic>
+                </div>
+            </div>
+            <div class="detail-about">
+                <a class="jie-user" href="@Url.Action("Home", "User", new {id = user.Id})">
+                    <img src="@(HGShare.Site.Tools.GenerateAvatar(user.Avatar, 45, user.Sex))" alt="@user.NickName">
+                    <cite>
+                        @user.NickName <span style="color:#FF7200">(@user.RName)</span>
+                    </cite>
+                </a>
+                <div class="detail-hits">
+                    <em>发布时间 @article.CreateTime</em>
+                    
+                    @if (userIsLogin && currentUser != null && currentUser.Id == article.UserId)
+                    {
+                        <span class="jie-admin" type="edit"><a href="@Url.Action("edit","article",new{id=article.Id})">编辑此贴</a></span>
+                    }
+                </div>
+            </div>
+
+            <div class="detail-body photos" style="margin-bottom: 20px;">
+                @if (article.State == 0)
+                {
+                    <blockquote class="layui-elem-quote">您的文章正在审核中...审核通过即可正常浏览！</blockquote>
+                }
+                else if (article.State == 2)
+                {
+                    <blockquote class="layui-elem-quote">您的文章未通过审核...<br />原因:@article.RefuseReason</blockquote>
+                }
+                @Html.Raw(article.Content)
+                @*<div class="fly-ad" style="margin-top: 30px; height:90px; overflow: hidden;">
+                    </div>*@
+            </div>
+
+            <a name="comment"></a>
+            <h2 class="page-title">热忱回答<span>（<em id="commentCount">@article.CommentNum</em>）</span></h2>
+            @Html.Action("Index", "Comment")
+            <div class="layui-form layui-form-pane">
+                @if (!article.IsCloseComment)
+                {
+                    <form action="@Url.Action("add", "comment")" method="post">
+                        <div class="layui-form-item layui-form-text">
+                            <div class="layui-input-block">
+                                <textarea id="comment_content" name="content" required lay-verify="content" placeholder="我要回答" class="layui-textarea fly-editor" style="height: 150px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <input type="hidden" name="id" value="@article.Id">
+                            <button class="layui-btn" lay-filter="*" lay-submit key="addcomment">提交回答</button>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <div class="fly-msg">
+                        评论已关闭！<a href="javascript:;" onclick="layer.alert(layui.jquery('#closeCommentReason').html())">查看原因</a>
+                        <div style="display: none" id="closeCommentReason">
+                            @article.CloseCommentReason
+                        </div>
+                    </div>
+                }
+                @**@
+            </div>
+
+        </div>
+    </div>
+    <div class="edge">
+        @Html.Action("HotDotArticleTop", "Home")
+        @Html.Action("HotCommentArticleTop", "Home")
+    </div>
+</div>
+@section main_back_Script
+{
+    <script type="text/javascript">
+        //文章id
+        layui.cache.AId = @article.Id;
+        layui.use(['aritcledetail','articlerealtimehandle'], function() {
+            layui.aritcledetail.InitComment('@Url.Action("commentbyid", "comment")');
+            layui.aritcledetail.InitDianZan('@Url.Action("comment", "dianzan")');
+            layui.aritcledetail.InitUpdateDot('@Url.Action("updatadot", "article")', {id:layui.cache.AId});
+            layui.articlerealtimehandle.InitDynamicDot('@Url.Action("getdots", "article")');
+        });
+    </script>
+}
+

@@ -1,0 +1,74 @@
+﻿@using HGShare.BBS.Models
+@using HGShare.Common
+@model List<HGShare.BBS.Models.ArticleWebEntity>
+@{
+    ViewBag.Title = HGShare.Site.Config.WebSysConfig.WebHomeTitle;
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+<div class="main layui-clear">
+    <div class="wrap">
+        <div class="content">
+            @Html.Action("ErJiNav","Home",new ArticleSearchEntity{ type = 0,bType = 0,isJingHua = 0,pageIndex = 1})
+
+            <ul class="fly-list">
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                     {
+                         <li class="fly-list-li">
+                             <a href="@Url.Action("home", "user", new {id = item.User.Id})" class="fly-list-avatar">
+                                 <img src="@(HGShare.Site.Tools.GenerateAvatar(item.User.Avatar, 45, item.User.Sex))" alt="">
+                             </a>
+                             <h2 class="fly-tip">
+                                 <a href="@Url.Action("detail", "article", new {aid = item.Article.Id})" title="@item.Article.Title">@item.Article.Title</a>
+                                 @if (item.Article.IsStick)
+                                 {
+                                     <span class="fly-tip-stick">置顶</span>
+                                 }
+                                 @if (item.Article.IsJiaJing)
+                                 {
+                                     <span class="fly-tip-jing">精帖</span>
+                                 }
+                             </h2>
+                             <p>
+                                 <span><a href="@Url.Action("home", "user", new {id = item.User.Id})">@item.User.NickName</a></span>
+                                 <span>@DatetimeTools.DateStringFromNow(item.Article.CreateTime)</span>
+                                 <span><a href="@Url.Action("Index", "Article", new ArticleSearchEntity {type = item.Article.Type})">@item.Article.TypeName</a></span>
+                                 <span class="fly-list-hint">
+                                     <i class="iconfont" title="回答">&#xe60c;</i> <dynamic class="article_commentnum" data-id="@(item.Article.Id)">@item.Article.CommentNum</dynamic>
+                                     <i class="iconfont" title="人气">&#xe60b;</i> <dynamic class="article_dot" data-id="@(item.Article.Id)">@item.Article.Dot</dynamic>
+                                 </span>
+                             </p>
+                         </li>
+                     }
+                }
+                else
+                {
+                    <div class="fly-none">暂无相关数据</div>
+                }
+            </ul>
+
+            <div style="text-align: center">
+                <div class="laypage-main">
+                    <a href="@Url.Action("Index","Article",new{pageIndex=2})" class="laypage-next">更多</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="edge">
+        @Html.Action("HotUsersTop", "Home")
+        @Html.Action("HotDotArticleTop", "Home")
+        @Html.Action("HotCommentArticleTop", "Home")
+        @Html.Action("Links", "Home")
+    </div>
+</div>
+@section main_back_Script
+{
+    <script type="text/javascript">
+        layui.use(['articlerealtimehandle'], function() {
+            layui.articlerealtimehandle.InitDynamicDot('@Url.Action("getdots", "article")');
+        });
+    </script>
+}

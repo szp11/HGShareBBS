@@ -1,0 +1,158 @@
+﻿@using HGShare.Site
+@model HGShare.VWModel.ArticleVModel
+@{
+    ViewBag.Title = "修改主题";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改主题</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @using (Html.BeginForm("Edit", "Articles", FormMethod.Post, new { @class = "form-horizontal", id = "addform" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">标题</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Title, new { @class = "form-control", @placeholder = "请输入标题" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Title)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">内容</label>
+                            <div class="col-sm-5">
+                                @Html.TextAreaFor(n => n.Content, new { @class = "form-control", @placeholder = "请输入内容" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Content)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">类型</label>
+                            <div class="col-sm-5">
+                                @Html.HiddenFor(n => n.Type, new { @class = "form-control", @placeholder = "" })
+                                <div class="input-group">
+                                    @Html.TextBoxFor(n => n.TypeName, new { @class = "form-control", @placeholder = "请选择父级类型", @readonly = "readonly" })
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" id="selectparentbtn">
+                                            选择
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Type)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                @Html.HiddenFor(n => n.Id)
+                                @Html.HiddenFor(n => n.Guid)
+                                <button class="btn btn-primary" type="submit" id="submit">保存内容</button>
+                                <button class="btn btn-white" type="button" onclick="window.history.back(-1);">取消</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_header
+{
+    <!--markdown 编辑器-->
+    <link href="@Url.StaticFile("~/Hplus/css/plugins/markdown/bootstrap-markdown.min.css")" rel="stylesheet" />
+}
+@section script_footer
+{
+    <!--表单验证-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.js?v=1.35")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.unobtrusive.js?v=1.40")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/jquery.form.js")"></script>
+    <!--markdown 编辑器-->
+    
+    <script src="@Url.StaticFile("~/hplus/js/plugins/markdown/bootstrap-markdown.js")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/plugins/markdown/bootstrap-markdown.zh.js")"></script>
+    <!--markdown 解释器-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/markdown/markdown.js")"></script>
+
+    @Html.Action("UploadImageView", "Upload", new { uploadid = Model.Guid })
+
+    <script type="text/javascript">
+        ValidataTools.Init({
+            backurl: "@Url.Action("Index", "Articles")",
+            form: $("#addform"),
+            submitbtn: $("#submit"),
+            tipstype: "修改"
+        });
+
+        /*选择父级模块(该弹框是在父级打开)*/
+        $("#selectparentbtn").on("click", function() {
+            $.get("@Url.Action("ArticleTypeSelect", "ArticleTypes")", { callback: "selectCallback", id: @Model.Id, pid: $("#Type").val(),did:0 }, function(html) {
+                //自定页
+                var layerid = layer.open({
+                    title: "选择功能文章类型",
+                    area: ['300px', '500px'],
+                    type: 1,
+                    shift: 2,
+                    shadeClose: true, //开启遮罩关闭
+                    content: html,
+                    btn: ['关闭']
+                });
+            });
+        });
+
+        /*点击模块选择时触发(因为是父级页面调用，所以回填对象是当前窗口的，在父级会获取到)*/
+        function selectCallback(thiswindow, id, name) {
+            if (thiswindow) {
+                $(thiswindow.document.getElementById("Type")).val(id);
+                $(thiswindow.document.getElementById("TypeName")).val(name);
+                //SetOrderId(id);
+            }
+        }
+        /*markdown 编辑器*/
+        var markdownEditor=$("#Content").markdown({ autofocus: false, savable: false,language:"zh",height:500,hiddenButtons:["cmdImage"]
+            ,
+            additionalButtons: [
+                [{
+                    name: "groupLink",
+                    data: [{
+                        name: "imgUpload",
+                        toggle: true, 
+                        title: "图片上传",
+                        icon: "glyphicon glyphicon-picture",
+                        callback: function(e) {
+                            UploadImage.Show();
+
+                        }
+                    },
+                        {
+                            name: "imgUpload",
+                            toggle: true, 
+                            title: "图片上传",
+                            icon: "glyphicon glyphicon-picture",
+                            callback: function(e){
+                                
+                                
+                            }
+                        }
+                    ]
+                }]
+            ] 
+        });
+    </script>
+}
+

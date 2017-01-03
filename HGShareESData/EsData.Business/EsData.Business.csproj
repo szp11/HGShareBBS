@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F944007B-3683-4D83-8AC7-5A37BEEC3730}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EsData.Business</RootNamespace>
+    <AssemblyName>EsData.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.2.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.2.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Elasticsearch.Net, Version=2.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elasticsearch.Net.2.4.6\lib\net45\Elasticsearch.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EP.Base.RabbitMQClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\RabbitMQClient\V2.0.2\EP.Base.RabbitMQClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Nest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEST.2.4.6\lib\net45\Nest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.6.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\RabbitMQClient\V2.0.2\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataDelete\DeleteManyHandle.cs" />
+    <Compile Include="DataDelete\DeleteTaskManager.cs" />
+    <Compile Include="DataDelete\IDelete.cs" />
+    <Compile Include="DataIndex\DataInit.cs" />
+    <Compile Include="DataIndex\EsHandle.cs" />
+    <Compile Include="DataIndex\IIndexer.cs" />
+    <Compile Include="DataIndex\IndexerBase.cs" />
+    <Compile Include="DataIndex\IndexerContainer.cs" />
+    <Compile Include="DataIndex\IndexerSimpleBase.cs" />
+    <Compile Include="DataIndex\InitTaskManager.cs" />
+    <Compile Include="DataSync\ISynchronizer.cs" />
+    <Compile Include="DataSync\QueueMonitor.cs" />
+    <Compile Include="DataSync\QueueMonitorManager.cs" />
+    <Compile Include="DataSync\SynchronizerBase.cs" />
+    <Compile Include="DataSync\SynchronizerContainer.cs" />
+    <Compile Include="DataSync\Synchronizer\DefaultSynchronizer.cs" />
+    <Compile Include="DataTrack\TrackHandle.cs" />
+    <Compile Include="EsHelper.cs" />
+    <Compile Include="Paping\AllPaging.cs" />
+    <Compile Include="Paping\IncrementPaging.cs" />
+    <Compile Include="Paping\IPaging.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RabbitLogger.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EsData.Configs\EsData.Configs.csproj">
+      <Project>{eccc381f-36ee-4580-a63b-31f2b65b0b81}</Project>
+      <Name>EsData.Configs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EsData.Core\EsData.Core.csproj">
+      <Project>{bdd0e383-9988-4fba-9986-f9f91dda1aa0}</Project>
+      <Name>EsData.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EsData.DL\EsData.DL.csproj">
+      <Project>{87f73cdf-bfc2-4401-9649-838a01b35573}</Project>
+      <Name>EsData.DL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EsData.Utils\EsData.Utils.csproj">
+      <Project>{8419b110-89a3-4bcd-b4a1-0717bf1982a2}</Project>
+      <Name>EsData.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataIndex\Indexers\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

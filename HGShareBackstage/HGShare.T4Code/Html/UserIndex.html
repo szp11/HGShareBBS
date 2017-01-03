@@ -1,0 +1,169 @@
+@using HGShare.Site.Config
+@using HGShare.VWModel
+@using Webdiyer.WebControls.Mvc
+@model PagedList<UserVModel>
+@{
+    ViewBag.Title = "User列表";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>User列表</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form action="@Url.Action("Index", "Users")" method="GET">
+                        <div class="row">
+                            <div class="col-sm-5 m-b-xs">
+								<div class="btn-group hidden-xs" role="group">
+									<a href="@Url.Action("Add","Users")" class="btn btn-outline btn-default" title="添加">
+										<i class="fa fa-pencil-square" aria-hidden="true"></i> 添加
+									</a>
+									<button class="btn btn-default btn-outline" type="button" name="refresh" title="刷新" id="pagereload">
+										<i class="fa fa-refresh"></i> 刷新
+									</button>
+									<button type="button" class="btn btn-outline btn-default" id="deletessubmit" title="删除选中项">
+										<i class="fa fa-trash" aria-hidden="true"></i> 删除
+									</button>
+								</div>
+                            </div>
+                            <div class="col-sm-4 m-b-xs">
+                                <!--其它搜索条件-->
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <input type="hidden" name="page" value="1" />
+                                    <input type="text" placeholder="请输入关键词" class="input-sm form-control">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-sm btn-primary"> 搜索</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+								<th>
+									<div class="checkbox checkbox-inline checkbox-primary">
+										<input type="checkbox" value="0" id="selectitem" />
+										<label for="selectitem"></label>
+									</div>
+								</th>
+															<th>用户ID</th>
+														<th>用户名</th>
+														<th>用户昵称</th>
+														<th>密码</th>
+														<th>角色ID</th>
+														<th>最后在线时间</th>
+														<th>最后操作时间</th>
+														<th>创建时间</th>
+														<th>头像</th>
+														<th>性别 0 未知 1男 2女</th>
+														<th>邮箱</th>
+														<th>Email是否激活</th>
+														<th>积分</th>
+														<th>文章数</th>
+														<th>回复数</th>
+														<th>禁用</th>
+														<th>禁用原因</th>
+														<th>QQ号</th>
+														<th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (UserVModel item in Model)
+                        {
+                            <tr>
+								<td>
+                                    <div class="checkbox checkbox-inline checkbox-primary">
+                                        <input type="checkbox" value="@item.Id" id="item_@item.Id" name="item" class="form-control" />
+										 <label for="item_@item.Id"></label>
+                                    </div>
+                                </td>
+                                
+									<td>@item.Id</td>								
+									<td>@item.Name</td>								
+									<td>@item.NickName</td>								
+									<td>@item.Password</td>								
+									<td>@item.RoleId</td>								
+									<td>@item.OnLineTime</td>								
+									<td>@item.ActionTime</td>								
+									<td>@item.CreateTime</td>								
+									<td>@item.Avatar</td>								
+									<td>@item.Sex</td>								
+									<td>@item.Email</td>								
+									<td>
+									<span class="label label-@(item.EmailStatus ? "success" : "default")">@(item.EmailStatus ? "是" : "否")</span>
+									</td>								
+									<td>@item.Score</td>								
+									<td>@item.ArticleNum</td>								
+									<td>@item.CommentNum</td>								
+									<td>
+									<span class="label label-@(item.Disable ? "success" : "default")">@(item.Disable ? "是" : "否")</span>
+									</td>								
+									<td>@item.DisableReason</td>								
+									<td>@item.QQ</td>																<td>
+									<a class="btn btn-info btn-sm" href="@Url.Action("Edit","Users")?Id=@item.Id"><i class="fa fa-paste"></i> 编辑</a>
+									<button class="btn btn-warning btn-sm delete_btn" type="button" data-id="@item.Id">
+										<i class="fa fa-warning"></i> <span class="bold">删除</span>
+									</button>
+								</td>
+                            </tr>
+                        }
+                    </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="dataTables_info">共 @Model.TotalItemCount 项 @Model.TotalPageCount 页，当前第 @Model.CurrentPageIndex 页</div>
+        </div>
+        <div class="col-sm-6">
+            <div class="dataTables_paginate paging_simple_numbers">
+                <ul class="pagination">
+                    @Html.Pager(Model, PageConfig.BackstageOptions)
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_footer
+{
+    <script type="text/javascript">
+        $(function () {
+            /*通用删除操作*/
+            ListTools.Delete.Init({ url: "@Url.Action("Delete","Users")", btn: ".delete_btn" });
+			/*通用多选删除操作*/
+            ListTools.Deletes.Init({ url: "@Url.Action("Deletes","Users")", btn: "#deletessubmit", itemname: "item" });
+            /*选择操作*/
+            ListTools.SelectBox.Init({ btn: "#selectitem", itemname: "item" });
+			/*刷新操作*/
+            ListTools.PageReload.Init({ btn: "#pagereload"});
+        })
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+

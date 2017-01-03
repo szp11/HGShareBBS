@@ -1,0 +1,121 @@
+﻿@using HGShare.Site
+@model HGShare.VWModel.LoginVModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>H+ 后台主题UI框架 - 登录</title>
+        <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+        <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+        <link rel="shortcut icon" href="@Url.StaticFile("~/hplus/favicon.ico")">
+        <link href="@Url.StaticFile("~/hplus/css/bootstrap.min.css?v=3.3.5")" rel="stylesheet">
+        <link href="@Url.StaticFile("~/hplus/css/font-awesome.min.css?v=4.4.0")" rel="stylesheet">
+        <link href="@Url.StaticFile("~/hplus/css/animate.min.css")" rel="stylesheet">
+        <link href="@Url.StaticFile("~/hplus/css/style.min.css?v=4.0.0")" rel="stylesheet">
+        <base target="_blank">
+        <!--[if lt IE 8]>
+            <meta http-equiv="refresh" content="0;ie.html" />
+        <![endif]-->
+        <script>if (window.top !== window.self) { window.top.location = window.location; }</script>
+    </head>
+    <body class="gray-bg">
+        <div class="middle-box text-center loginscreen  animated fadeInDown">
+            <div>
+                <div>
+                    <h1 class="logo-name">H+</h1>
+                </div>
+                <h3>欢迎使用 H+</h3>
+                    @using (Html.BeginForm("Login","Login",FormMethod.Post,new{id="loginForm"}))
+                    {
+                        @Html.ValidationSummary(true,null, new { @class = "form-group" })
+                        <div class="form-group has-feedback">
+                            <label class="control-label sr-only" for="Username">用户名</label>
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "用户名" })
+                            @Html.ValidationMessageFor(n => n.Username)
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label class="control-label sr-only" for="密码">用户名</label>
+                            @Html.PasswordFor(n => n.Password, new { @class = "form-control", @placeholder = "密码" })
+                            @Html.ValidationMessageFor(n => n.Password)
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group has-error">
+                            <span class="help-block m-b-none">
+                                <span id="login-server-error" class=""></span>
+                            </span>
+                        </div>
+                        <button type="submit" class="btn btn-primary block full-width m-b" id="Login">登 录</button>
+                        <p class="text-muted text-center">
+                            <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
+                        </p>
+                    }
+            </div>
+        </div>
+        <script src="@Url.StaticFile("~/hplus/js/jquery.min.js?v=2.1.4")"></script>
+        <script src="@Url.StaticFile("~/hplus/js/bootstrap.min.js?v=3.3.5")"></script>
+        <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.js?v=1.35")"></script>
+        <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.unobtrusive.js?v=1.40")"></script>
+        <script src="@Url.StaticFile("~/Hplus/js/jquery.form.js")"></script>
+    </body>
+</html>
+<script type="text/javascript">
+    /*客户端验证*/
+    $.validator.setDefaults({
+        highlight: function (a, b, c) {
+            $(a).closest(".form-group").removeClass("has-success").addClass("has-error");
+            $(a).nextAll(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+        },
+        unhighlight: function (a, b, c) {
+            $(a).closest(".form-group").removeClass("has-error").addClass("has-success");
+            $(a).nextAll(".glyphicon").removeClass("glyphicon-remove").addClass("glyphicon-ok");
+        },
+        errorElement:"span",
+        errorClass: "help-block m-b-none",
+        validClass: "valid",
+        submitHandler: function (a, b, c) {
+            //按钮处理
+            $("#Login").removeClass("btn-primary")
+                .addClass("btn-default")
+                .attr({ "disabled": "disabled" })
+                .html("登录中...");
+            $("#loginForm").ajaxSubmit({
+                success: function (result) {
+                    //登陆结果判断
+                    if (!result.ResultState) {
+                        //按钮处理
+                        $("#Login").addClass("btn-primary")
+                            .removeClass("btn-default")
+                            .removeAttr("disabled")
+                            .html("登录");
+                        $("#login-server-error").html(result.Message).show()
+                            .parent().parent().removeClass("has-success").addClass("has-error");
+                    } else {
+                        $("#login-server-error").html("登陆成功,跳转中...").show()
+                            .parent().parent().removeClass("has-error").addClass("has-success");
+                        window.location.href = "@Url.Action("index","home")";
+                    }
+                },
+                error: function (xmlHttpRequest, textStatus, error) {
+                    $("#login-server-error").html(error).show();
+                    //按钮处理
+                    $("#Login").addClass("btn-primary")
+                        .removeClass("btn-default")
+                        .removeAttr("disabled")
+                        .html("登录");
+                    $("#login-server-error").html(result.Message).show()
+                        .parent().parent().removeClass("has-success").addClass("has-error");
+                }
+            });
+        }
+    });
+    /*服务错误*/
+    $("body").click(function() {
+        $("#login-server-error").hide();
+    });
+</script>
+

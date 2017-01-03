@@ -1,0 +1,43 @@
+﻿@using HGShare.Site
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--360浏览器优先以webkit内核解析-->
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="@Url.StaticFile("~/hplus/favicon.ico")">
+    <!--bootstrap-->
+    <link href="@Url.StaticFile("~/hplus/css/bootstrap.min.css")" rel="stylesheet">
+    <!--字体图标-->
+    <link href="@Url.StaticFile("~/hplus/css/font-awesome.min.css")" rel="stylesheet">
+    <!--css动画-->
+    @*<link href="@Url.StaticFile("~/hplus/css/animate.min.css")" rel="stylesheet">*@
+    <link href="@Url.StaticFile("~/hplus/css/style.min.css")" rel="stylesheet">
+    <!--datatable 列表-->
+    <link href="@Url.StaticFile("~/hplus/css/plugins/dataTables/dataTables.bootstrap.css")" rel="stylesheet">
+    <!--多选单选插件-->
+    @*<link href="@Url.StaticFile("~/hplus/css/plugins/iCheck/custom.css")" rel="stylesheet">*@
+    <link href="@Url.StaticFile("~/hplus/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css")" rel="stylesheet" />
+    @RenderSection("script_header", false)
+    <base target="_self">
+</head>
+<body class="gray-bg">
+    @RenderBody()
+    <!--JQuery-->
+    <script type="text/javascript" src="@Url.StaticFile("~/hplus/js/jquery.min.js")"></script>
+    <!--bootstrap-->
+    <script type="text/javascript" src="@Url.StaticFile("~/hplus/js/bootstrap.min.js")"></script>
+    <!--多选单选插件-->
+    @*<script type="text/javascript" src="@Url.StaticFile("~/hplus/js/plugins/iCheck/icheck.min.js")"></script>*@
+    <!--内容区域框架辅助方法-->
+    <script type="text/javascript" src="@Url.StaticFile("~/hplus/js/content.min.js")"></script>
+    <!--内容区域管理工具-->
+    <script type="text/javascript" src="@Url.StaticFile("~/hplus/js/manager.tools.js")"></script>
+    @RenderSection("script_footer", false)
+    <script type="text/javascript">
+        /*多选单选样式*/
+        //$(".i-checks").iCheck({ checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green", });
+    </script>
+</body>
+</html>

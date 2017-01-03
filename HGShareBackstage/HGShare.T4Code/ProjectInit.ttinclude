@@ -1,0 +1,32 @@
+﻿<#@ IntelliSenseLanguage processor="tangibleT4Editor" language="C#" #>
+<#@ include file="$(ProjectDir)\MultipleOutputHelper.ttinclude"  #>
+<#@ include file="$(ProjectDir)\DbHelper.ttinclude"  #>
+<#+ 
+	/// <summary>
+	/// 常用设置
+	/// </summary>
+	public class Settings
+	{
+		/// <summary>
+		/// 数据库链接配置
+		/// </summary>
+		public static Config DBConfig=new Config(){
+								//ConnectionString="server=qds18168063.my3w.com;uid=qds18168063;pwd=326794739;database=qds18168063_db;",
+								ConnectionString="server=.;uid=sa;pwd=public@123;database=ArticleManager;",
+								DbDatabase="ArticleManager"
+								};
+		/// <summary>
+		/// 程序数据库配置名称
+		/// </summary>
+		public static string WebConfigDbConName="DbConfig.ArticleManagerConnString";
+		/// <summary>
+		/// author
+		/// </summary>
+		public static string Author="huhangfei";
+		/// <summary>
+		/// 命名空间
+		/// </summary>
+		public static string BaseNamespace="HGShare";
+	}
+	
+#>

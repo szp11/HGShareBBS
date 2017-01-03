@@ -1,0 +1,167 @@
+﻿<#@ template debug="false" hostspecific="True" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Data.dll" #>
+<#@ assembly name="System.Data.DataSetExtensions.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ include file="$(ProjectDir)\ProjectInit.ttinclude"  #>
+<# 
+	var manager = Manager.Create(Host, GenerationEnvironment); 
+	var tables=new DbHelper(Settings.DBConfig);
+#>
+<# foreach(DbTable table in tables.GetDbTables())  { #>
+<# manager.StartHeader(); #>
+<#
+	    manager.StartNewFile(table.TableName+"sDal.cs");//开始输出文件
+
+		List<DbColumn> columns= tables.GetDbColumns(table.OldTableName);
+		//得到主键信息
+		DbColumn primaryKeyCol=DbHelper.GetPrimaryKey(columns);
+		string pk=primaryKeyCol==null?"Id":primaryKeyCol.ColumnName;
+	    string oldType=primaryKeyCol==null?"int":primaryKeyCol.ColumnType;
+		string pktype=primaryKeyCol==null?"int":SqlServerDbTypeMap.MapCsharpType(primaryKeyCol.ColumnType);
+#>
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using Dapper;
+using HGShare.DataProvider.DapperHelper;
+using HGShare.Model;
+namespace <#=Settings.BaseNamespace#>.DataProvider
+{    
+	/// <summary>
+    /// <#=table.TableName#> 
+    /// </summary>
+    public class <#=table.TableName#>s
+    {
+
+		/// <summary>
+		/// 添加<#=table.TableName#>Info
+		/// </summary>
+		/// <param name="<#=table.TableName.ToLower()#>"></param>
+		/// <returns></returns>
+		public static <#=pktype#> Add<#=table.TableName#>(<#=table.TableName#>Info <#=table.TableName.ToLower()#>)
+		{
+			string sql = @"INSERT INTO [<#=table.OldTableName#>]
+			(<#=DbHelper.GetNoIsIdentityFileds(columns,"[","]") #>)
+			VALUES
+			(<#=DbHelper.GetNoIsIdentityFileds(columns,"@") #>) 
+			SELECT SCOPE_IDENTITY()
+			";
+			var par = new DynamicParameters();
+			<# foreach(DbColumn column in columns){ #>
+<#if(column.IsIdentity) continue; #>
+par.Add("@<#=column.ColumnName#>",<#=table.TableName.ToLower()#>.<#=column.ColumnName#> , DbType.<#=column.DbType #>);
+			<#}#>
+return DapWrapper.InnerQueryScalarSql<<#=pktype#>>(<#=Settings.WebConfigDbConName#>, sql, par);
+		}
+		/// <summary>
+		/// 修改<#=table.TableName#>Info
+		/// </summary>
+		/// <param name="<#=table.TableName.ToLower()#>"></param>
+		/// <returns></returns>
+		public static int Update<#=table.TableName#>(<#=table.TableName#>Info <#=table.TableName.ToLower()#>)
+		{
+			string sql = @"UPDATE  [<#=table.OldTableName#>] SET 
+<# foreach(DbColumn column in columns){ #>
+<#if(column.IsIdentity || column.IsPrimaryKey) continue; #>
+						<#=column.ColumnName#>=@<#=column.ColumnName#><#if(column.ColumnID<columns.Max(n=>n.ColumnID)){#>,<#}#>
+
+<#}#> WHERE <#=pk#>=@<#=pk#>";
+			var par = new DynamicParameters();
+			par.Add("@<#=pk#>", <#=table.TableName.ToLower()#>.<#=pk#>, DbType.<#=SqlServerDbTypeMap.MapDbType(oldType) #>);
+			<# foreach(DbColumn column in columns){ #>
+<#if(column.IsIdentity || column.IsPrimaryKey) continue; #>
+par.Add("@<#=column.ColumnName#>",<#=table.TableName.ToLower()#>.<#=column.ColumnName#> , DbType.<#=column.DbType #>);
+			<#}#>
+return DapWrapper.InnerExecuteSql(<#=Settings.WebConfigDbConName#>, sql, par);
+		}
+		/// <summary>
+		/// 根据<#=pk.ToLower()#>获取<#=table.TableName#>Info
+		/// </summary>
+		/// <param name="<#=pk.ToLower()#>"></param>
+		/// <returns></returns>
+		public static <#=table.TableName#>Info Get<#=table.TableName#>Info(<#=pktype+" "+pk.ToLower()#>)
+		{
+			string sql = "select <#=DbHelper.GetFileds(columns,"[","]") #> FROM [<#=table.OldTableName#>] WHERE <#=pk#>=@<#=pk#>";
+			var par = new DynamicParameters();
+			par.Add("@<#=pk#>", <#=pk.ToLower()#>, DbType.<#=SqlServerDbTypeMap.MapDbType(oldType) #>);
+			return DapWrapper.InnerQuerySql<<#=table.TableName#>Info>(<#=Settings.WebConfigDbConName#>, sql, par).FirstOrDefault();
+		}
+		/// <summary>
+		/// 根据<#=pk.ToLower()#>删除<#=table.TableName#>
+		/// </summary>
+		/// <param name="<#=pk.ToLower()#>"></param>
+		/// <returns></returns>
+		public static Int32 Delete<#=table.TableName#>(<#=pktype+" "+pk.ToLower()#>)
+		{
+			string sql="DELETE [<#=table.OldTableName#>] WHERE <#=pk#>=@<#=pk#>";
+			var par = new DynamicParameters();
+			par.Add("@<#=pk#>", <#=pk.ToLower()#>, DbType.<#=SqlServerDbTypeMap.MapDbType(oldType) #>);
+			return DapWrapper.InnerExecuteSql(<#=Settings.WebConfigDbConName#>, sql, par);
+		}
+		/// <summary>
+		/// 根据<#=pk.ToLower()#>s删除<#=table.TableName#>多条记录
+		/// </summary>
+		/// <param name="<#=pk.ToLower()#>s"></param>
+		/// <returns></returns>
+		public static Int32 Delete<#=table.TableName#>s(<#=pktype+"[] "+pk.ToLower()#>s)
+		{
+			if (<#=pk.ToLower()#>s.Length == 0)
+                return 0;
+			string sql="DELETE [<#=table.OldTableName#>] WHERE <#=pk#> IN ("+string.Join(",",<#=pk.ToLower()#>s)+")";
+			return DapWrapper.InnerExecuteText(<#=Settings.WebConfigDbConName#>, sql);
+		}
+		/// <summary>
+       /// 获取<#=table.TableName#>分页列表(自定义存储过程)
+       /// </summary>
+       /// <param name="pageIndex">页码</param>
+       /// <param name="pageSize">每页显示条数</param>
+       /// <param name="beginTime">开始时间</param>
+       /// <param name="endTime">结束时间</param>
+       /// <param name="recordCount">总记录数</param>
+       /// <returns><#=table.TableName#>列表</returns>
+       public static List<<#=table.TableName#>Info> Get<#=table.TableName#>PageList(int pageIndex, int pageSize, DateTime? beginTime, DateTime? endTime, out int recordCount)
+       {
+           recordCount = 0;
+           var par = new DynamicParameters();
+           par.Add("@PageIndex", pageIndex, DbType.Int32);
+           par.Add("@PageSize", pageSize, DbType.Int32);
+           par.Add("@BeginTime", beginTime, DbType.DateTime);
+           par.Add("@EndTime", !endTime.HasValue ? endTime : endTime.Value.AddDays(1).AddMilliseconds(-1), DbType.DateTime);
+           par.Add("@TotalCount", recordCount, DbType.Int32, ParameterDirection.Output);
+           var result = DapWrapper.InnerQueryProc<<#=table.TableName#>Info>(DbConfig.ArticleManagerConnString, "proc_Get<#=table.TableName#>PageList", par);
+           recordCount = par.Get<int>("@TotalCount");
+           return result;
+       }
+	   /// <summary>
+       /// 获取<#=table.TableName#>分页列表(分页存储过程)
+       /// </summary>
+       /// <param name="pageIndex">页码</param>
+       /// <param name="pageSize">每页显示条数</param>
+       /// <param name="beginTime">开始时间</param>
+       /// <param name="endTime">结束时间</param>
+       /// <param name="pageCount">页数</param>
+       /// <param name="count">总记录数</param>
+       /// <returns><#=table.TableName#>列表</returns>
+       public static List<<#=table.TableName#>Info> Get<#=table.TableName#>PageList(int pageIndex, int pageSize, DateTime? beginTime,
+           DateTime? endTime, out int pageCount, out int count)
+       {
+           const string fieldKey = "<#=pk#>";
+           const string fieldShow = "<#=DbHelper.GetFileds(columns,"[","]") #>";
+           const string fieldOrder = "<#=pk#> desc";
+           const string @where = "";
+          return Paging<<#=table.TableName#>Info>.GetPageList("[<#=table.OldTableName#>]", fieldKey, fieldShow, fieldOrder, where, pageIndex, pageSize, out pageCount, out count).ToList();
+       }
+    }
+}
+<#
+	manager.EndBlock();//结束输出
+}
+manager.Process(true);
+#>

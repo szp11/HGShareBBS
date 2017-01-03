@@ -1,0 +1,17 @@
+﻿
+@using HGShare.BBS.Models
+@model ArticleSearchEntity
+<div class="fly-tab">
+   <span>
+       <a href="@Url.Action("Index", "Article",new ArticleSearchEntity{type = Model.type,bType = 0,isJingHua = 0,pageIndex = 1})" class="@(Model.isJingHua!=2 ? "tab-this" : "")">全部</a>
+        @*<a href="">未结帖</a>
+        <a href="">已采纳</a>*@
+        <a href="@Url.Action("Index", "Article", new ArticleSearchEntity { type = Model.type, bType = 0, isJingHua = 2, pageIndex = 1 })" class="@(Model.isJingHua==2 ? "tab-this" : "")">精帖</a>
+        <a href="@Url.Action("UserCenter","User")">我的帖</a>
+    </span>
+    @*<form action="http://cn.bing.com/search" class="fly-search">
+        <i class="iconfont icon-sousuo"></i>
+        <input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
+    </form>*@
+        <a href="@Url.Action("add","article")" class="layui-btn jie-add">发布文章</a>
+    </div>

@@ -1,0 +1,52 @@
+﻿@model HGShare.VWModel.UserVModel
+@{
+    ViewBag.Title = "激活账号";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+<div class="main layui-clear" style="min-height: 600px;">
+    <h2 class="page-title">激活邮箱</h2>
+    <ul class="layui-form">
+        <li class="layui-form-li">
+            <label for="activate">您的邮箱：</label>
+            <span class="layui-form-text">
+                @Model.Email
+                @if (Model.EmailStatus)
+                {
+                    <em style="color:#999;">（已成功激活）</em>
+                }
+                else
+                {
+                    <em style="color:#c00;">（尚未激活）</em>
+                }
+            </span>
+        </li>
+        @if (!Model.EmailStatus)
+        {
+            <li class="layui-form-li" style="margin-top: 20px; line-height: 26px;">
+                <form action="" method="POST">
+                    <div>
+                        1. 如果您未收到邮件，或激活链接失效，您可以
+                        <button class="layui-btn layui-btn-mini layui-btn-normal" lay-filter="*" alert="true" lay-submit>重新发送邮件</button>，或者
+                        <a class="layui-form-a" style="color: #4f99cf;" href="@Url.Action("UserSet", "User")">更换邮箱</a>；
+                    </div>
+
+                    <div>
+                        2. 如果您始终没有收到 @HGShare.Site.Config.WebSysConfig.WebName 发送的邮件，请注意查看您邮箱中的垃圾邮件；
+                    </div>
+                    <div>
+                        3. 如果你实在无法激活邮件，您还可以联系：admin@xx.com
+                    </div>
+                </form>
+            </li>
+        }
+    </ul>
+</div>
+
+@section main_back_Script
+{
+    <script type="text/javascript">
+        layui.use(['formsubmit'], function () {
+
+        });
+    </script>
+}

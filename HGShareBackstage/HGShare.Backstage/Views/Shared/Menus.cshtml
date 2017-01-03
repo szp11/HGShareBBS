@@ -1,0 +1,95 @@
+﻿@using HGShare.Model
+@using HGShare.Site
+@{
+    
+    //菜单 数据设计/ 功能实现的无限极菜单,界面现在输出三级菜单  author:huhangfei
+    
+    List<ModulInfo> allList = ViewData["CurrentUserModuls"] == null ? new List<ModulInfo>() : (List<ModulInfo>)ViewData["CurrentUserModuls"];
+    allList = allList.Where(n => n.IsDisplay).ToList();
+    List<ModulInfo> parentList = allList.Where(n => n.PId == 0 && n.IsDisplay).ToList();
+    var userinfo = (UserInfo)ViewData["CurrentUserInfo"];
+    var role = HGShare.Business.Roles.GetRoleInfo(userinfo.RoleId);
+}
+<ul class="nav" id="side-menu">
+    <li class="nav-header">
+        <div class="dropdown profile-element">
+            <span>
+                <img class="img-circle" style="width: 60px;height: 60px;" src="@(Tools.GenerateAvatar(userinfo.Avatar, 60))" />
+            </span>
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <span class="clear">
+                    <span class="block m-t-xs"><strong class="font-bold">@(string.IsNullOrEmpty(userinfo.NickName)?userinfo.Name:userinfo.NickName)</strong></span>
+                    <span class="text-muted text-xs block">@(role==null?"":role.RName)<b class="caret"></b></span>
+                </span>
+            </a>
+            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                <li>
+                    <a class="J_menuItem" href="form_avatar.html">修改头像</a>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="profile.html">个人资料</a>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="contacts.html">联系我们</a>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="mailbox.html">信箱</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="login.html">安全退出</a>
+                </li>
+            </ul>
+        </div>
+        <div class="logo-element">
+            H+
+        </div>
+    </li>
+    <li>
+        <a href="">
+            <i class="fa fa-home"></i>
+            <span class="nav-label">主页</span>
+            @*<span class="fa arrow"></span>*@
+        </a>
+    </li>
+@foreach (var item in parentList)
+{
+    <li>
+        <a href="#">
+            <i class="@item.Ico"></i>
+            <span class="nav-label">@item.ModulName</span>
+            <span class="fa arrow"></span>
+        </a>
+        <ul class="nav nav-second-level">
+            @{
+                List<ModulInfo> subset = allList.Where(n => n.PId == item.Id).ToList();
+                foreach (var itemc in subset)
+                {
+                    if (allList.Count(n => n.PId == itemc.Id) == 0)
+                    {
+                        <li>
+                            <a class="J_menuItem" href="@(itemc.Controller + "/" + itemc.Action)">@itemc.ModulName</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="javascript:;">@itemc.ModulName <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse" aria-expanded="false" style="height: 0px;">
+                                @foreach (var itemcc in allList.Where(n => n.PId == itemc.Id))
+                                {
+
+                                    <li>
+                                        <a class="J_menuItem" href="@(itemcc.Controller + "/" + itemc.Action)">@itemcc.ModulName</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+
+                }
+}
+        </ul>
+    </li>
+}
+</ul>

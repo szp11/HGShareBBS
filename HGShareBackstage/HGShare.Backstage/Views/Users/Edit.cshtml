@@ -1,0 +1,170 @@
+﻿@using HGShare.Site
+@model HGShare.VWModel.UserVModel
+@{
+    ViewBag.Title = "修改用户";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改用户</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "form-horizontal", id = "editform" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">头像</label>
+                            <div class="col-sm-5">
+                                <a href="@Url.Action("UploadAvatar", "Users", new { id = Model.Id })">
+                                    <img id="AvatarImg" class="roundavatarimg s200" src="@(Tools.GenerateAvatar(Model.Avatar,Model.Sex))">
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">用户名</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Name, new { @class = "form-control", @placeholder = "请输入用户名" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Name)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">昵称</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.NickName, new { @class = "form-control", @placeholder = "请输入昵称" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.NickName)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">密码</label>
+                            <div class="col-sm-5">
+                                @Html.PasswordFor(n => n.Password, new { @class = "form-control", @placeholder = "请输入密码" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Password)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">确认密码</label>
+                            <div class="col-sm-5">
+                                @Html.PasswordFor(n => n.ConfirmPassword, new { @class = "form-control", @placeholder = "请确认密码" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.ConfirmPassword)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">邮箱</label>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(n => n.Email, new { @class = "form-control", @placeholder = "请输入邮箱" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Email)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">性别</label>
+                            <div class="col-sm-5">
+                                @{
+                                            var sexs = HGShare.Common.EnumHelper.GetValueFromDescriptions<HGShare.Enums.UserSex>();
+                                }
+                                @foreach (var item in sexs)
+                                {
+                                    <div class="radio radio-info radio-inline">
+                                        @Html.RadioButtonFor(n => n.Sex, item.Value, new { id = "Sex" + item.Value })
+                                        <label for="Sex@(item.Value)">
+                                            @item.Key
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Sex)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">角色</label>
+                            <div class="col-sm-5">
+                                @Html.DropDownListFor(n => n.RoleId, Model.Roles.Select(n => new SelectListItem() { Value = n.Id.ToString(), Text = n.RName }), new { @class = "form-control chosen-select" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.RoleId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                @Html.HiddenFor(n=>n.Id)
+                                <button class="btn btn-primary" type="submit" id="submit">修改信息</button>
+                                <button class="btn btn-white" type="button" onclick="window.history.back(-1);">取消</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_header
+{
+    <!--下拉框插件-->
+    <link href="@Url.StaticFile("~/hplus/css/plugins/chosen/chosen.css")" rel="stylesheet" />
+}
+@section script_footer
+{
+    <!--表单验证-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.js?v=1.35")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.unobtrusive.js?v=1.40")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/jquery.form.js")"></script>
+    <!--下拉框插件-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/chosen/chosen.jquery.js")"></script>
+    <script type="text/javascript">
+        ValidataTools.Init({
+            backurl: "@(Request.UrlReferrer == null ? Url.Action("Index", "Users") : Request.UrlReferrer.ToString())",
+            form: $("#editform"),
+            submitbtn: $("#submit"),
+            btntext: "修改信息",
+            tipstype:"修改"
+        });
+        /*下拉框*/
+        var config = {
+            ".chosen-select": {},
+            ".chosen-select-deselect": {
+                allow_single_deselect: !0
+            },
+            ".chosen-select-no-single": {
+                disable_search_threshold: 10
+            },
+            ".chosen-select-no-results": {
+                no_results_text: "没有搜索结果!"
+            },
+            ".chosen-select-width": {
+                width: "95%"
+            }
+        };
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+    </script>
+}
+

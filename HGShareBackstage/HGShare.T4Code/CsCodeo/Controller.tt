@@ -1,0 +1,165 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ include file="$(ProjectDir)\ProjectInit.ttinclude"  #>
+<# 
+	var manager = Manager.Create(Host, GenerationEnvironment); 
+	var tables=new DbHelper(Settings.DBConfig);
+#>
+<# foreach(DbTable table in tables.GetDbTables())  { #>
+<# manager.StartHeader(); #>
+<#
+	    manager.StartNewFile(table.TableName+"sController.cs");//开始输出文件
+		List<DbColumn> columns= tables.GetDbColumns(table.TableName);
+		//得到主键信息
+		DbColumn primaryKeyCol=DbHelper.GetPrimaryKey(columns);
+		string pk=primaryKeyCol==null?"Id":primaryKeyCol.ColumnName;
+		string pktype=primaryKeyCol==null?"int":primaryKeyCol.ColumnType;
+		string pkdic=primaryKeyCol==null?"Id":primaryKeyCol.Remark;
+	   string pktypeCs=primaryKeyCol==null?"int":SqlServerDbTypeMap.MapCsharpType(primaryKeyCol.ColumnType);
+#>
+using System.Linq;
+using System.Web.Mvc;
+using System.ComponentModel;
+using HGShare.Backstage.Controllers.Base;
+using HGShare.Business;
+using HGShare.Site;
+using HGShare.Site.ActionResult;
+using HGShare.Site.Config;
+using HGShare.VWModel;
+using Webdiyer.WebControls.Mvc;
+
+namespace HGShare.Backstage.Controllers
+{
+	/// <summary>
+    /// <#=table.TableName#>管理
+    /// </summary>
+    [Description("<#=table.TableName#>管理")]
+    public class <#=table.TableName#>sController : BaseController
+    {
+        /// <summary>
+        /// <#=table.TableName#>列表
+        /// </summary>
+        /// <param name="page">页码</param>
+        /// <returns></returns>
+		[Description("<#=table.TableName#>列表")]
+        public ActionResult Index(int? page)
+        {
+            int pageIndex = page.HasValue ? page.Value : 1;
+            int pageSize = PageConfig.BackstagePageSize;
+            int count,pageCount;
+            var result = <#=table.TableName#>s.<#=table.TableName#>InfosToVModels(<#=table.TableName#>s.Get<#=table.TableName#>PageList(pageIndex, pageSize,null,null,out pageCount, out count));
+            PagedList<<#=table.TableName#>VModel> pl = result.ToPagedList(pageIndex, pageSize);
+            pl.TotalItemCount = count;
+            pl.CurrentPageIndex = pageIndex;
+            return View(pl);
+        }
+		/// <summary>
+        /// 删除<#=table.TableName#>
+        /// </summary>
+        /// <param name="<#=pk.ToLower()#>"><#=pkdic#></param>
+        /// <returns></returns>
+        [HttpPost]
+		[Description("删除<#=table.TableName#>操作")]
+        public JsonResult Delete(<#=pktypeCs#> <#=pk.ToLower()#>)
+        {
+            var result = new JsonResultModel { ResultState = <#=table.TableName#>s.Delete<#=table.TableName#>(<#=pk.ToLower()#>) > 0 };
+            return Json(result);
+        }
+		/// <summary>
+        /// 删除<#=table.TableName#>
+        /// </summary>
+        /// <param name="<#=pk.ToLower()#>s"><#=pk.ToLower()#>s</param>
+        /// <returns></returns>
+        [HttpPost]
+		[Description("删除多个<#=table.TableName#>操作")]
+        public JsonResult Deletes(<#=pktypeCs#> [] <#=pk.ToLower()#>s)
+        {
+            var result = new JsonResultModel { ResultState = <#=table.TableName#>s.Delete<#=table.TableName#>s(<#=pk.ToLower()#>s) > 0 };
+            return Json(result);
+        }
+		/// <summary>
+        /// 添加<#=table.TableName#>
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+		[Description("添加<#=table.TableName#>页面")]
+        public ActionResult Add()
+        {
+            var vm = new <#=table.TableName#>VModel();
+            return View(vm);
+        }
+        /// <summary>
+        /// 添加<#=table.TableName#>
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+		[Description("添加<#=table.TableName#>操作")]
+        public JsonResult Add(<#=table.TableName#>VModel model)
+        {
+            var result = new JsonResultModel();
+            if (ModelState.IsValid)
+            {
+                //add 
+                result.ResultState = <#=table.TableName#>s.Add<#=table.TableName#>(<#=table.TableName#>s.<#=table.TableName#>VModelToInfo(model))>0;
+            }
+            else
+            {
+                result.ResultState = false;
+                result.Message = ModelStateHelper.GetAllErrorMessage(ModelState);
+            }
+
+            return Json(result);
+        }
+		 /// <summary>
+        /// 修改<#=table.TableName#>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+		[Description("修改<#=table.TableName#>页面")]
+        public ActionResult Edit(int id)
+        {
+            var model = <#=table.TableName#>s.<#=table.TableName#>InfoToVModel(<#=table.TableName#>s.Get<#=table.TableName#>Info(id));
+            return View(model);
+        }
+        /// <summary>
+        /// 修改<#=table.TableName#>
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+		[Description("修改<#=table.TableName#>操作")]
+        public JsonResult Edit(<#=table.TableName#>VModel model)
+        {
+            var result = new JsonResultModel();
+            if (ModelState.IsValid)
+            {
+                //edit user
+                result.ResultState = <#=table.TableName#>s.Update<#=table.TableName#>(<#=table.TableName#>s.<#=table.TableName#>VModelToInfo(model)) > 0;
+            }
+            else
+            {
+                result.ResultState = false;
+                result.Message = ModelStateHelper.GetAllErrorMessage(ModelState);
+            }
+
+            return Json(result);
+        }
+    }
+}
+
+<#	
+	manager.EndBlock();//结束输出
+#>
+
+<#}#>
+<#	
+   manager.Process(true);
+#>

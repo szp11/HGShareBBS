@@ -1,0 +1,93 @@
+﻿@using HGShare.Site
+@{
+    ViewBag.Title = "发布文章";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    string guid = Guid.NewGuid().ToString();
+}
+
+<div class="main layui-clear">
+    <h2 class="page-title">发表文章</h2>
+
+    @*<div class="fly-none">模块开发中...</div>*@
+    <div class="layui-form layui-form-pane">
+        <form action="" method="post">
+            <div class="layui-form-item">
+                <label for="L_title" class="layui-form-label">标题</label>
+                <div class="layui-input-block">
+                    <input type="text" id="title" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <div class="layui-input-block">
+                    <textarea id="content" name="content" required lay-verify="content" placeholder="请输入内容" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
+                </div>
+                <label for="L_content" class="layui-form-label" style="top: -2px;">描述</label>
+            </div>
+            @*<div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">所在类别</label>
+                        <div class="layui-input-block">
+                            <select lay-verify="required" name="class">
+                                <option></option>
+                                <option value="1">layui框架综合</option>
+                                <option value="2">layui.mobile模块</option>
+                                <option value="3">layer弹出层</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">悬赏飞吻</label>
+                        <div class="layui-input-block">
+                            <select name="experience">
+                                <option value="5" selected>5</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>*@
+            <div class="layui-form-item">
+                <label for="L_vercode" class="layui-form-label">所在类别</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="typename" name="typename" required lay-verify="required" placeholder="请选择类型" autocomplete="off" class="layui-input"  style="cursor: pointer;">
+                    <input type="hidden" id="type" name="type" value="" />
+                </div>
+              <div class="layui-form-mid">
+                    @*<button class="layui-btn layui-btn-normal" id="selecttype">选择</button>*@
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_vercode" class="layui-form-label">人类验证</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="Vercode" name="Vercode" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid vercodeimg">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <input type="hidden" name="guid" value="@guid"/>
+                <button class="layui-btn" lay-filter="*" lay-submit alert="true" key="addarticle">立即发布</button>
+            </div>
+        </form>
+    </div>
+</div>
+@section script_header
+{
+    <!--树-->
+    <link href="@Url.StaticFile("~/res/plugins/jsTree/style.min.css")" rel="stylesheet" />
+}
+@section main_back_Script
+{
+    <script type="text/javascript">
+        layui.use(['articlehandle'], function () {
+            var options = {
+                treeDataApi: '@Url.Action("ArticleTypeSelect", "ArticleType")',
+                displayNameElem: '#typename',
+                displayIdElem: '#type',
+                chengElem: '#typename'
+            };
+            layui.articlehandle(options);
+        });
+    </script>
+}

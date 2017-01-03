@@ -1,0 +1,242 @@
+﻿@using HGShare.Site
+@model HGShare.VWModel.UserVModel
+@{
+    ViewBag.Title = "上传头像";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>上传头像</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @using (Html.BeginForm("UploadAvatar", "Users", FormMethod.Post, new { @class = "form-horizontal", id = "addform" }))
+                    {
+
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                <div class="avatarbox">
+                                    <img id="UploadAvatarImg" src="@(Tools.GenerateAvatar(Model.Avatar,Model.Sex))">
+                                </div>
+                            </div>
+                        </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-3 docs-buttons">
+                            <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                                <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="选择图片">
+                                    <span class="fa fa-upload"></span>
+                                </span>
+                            </label>
+                            <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="放大">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="放大">
+                                    <span class="fa fa-search-plus"></span>
+                                </span>
+                            </button>
+                            <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="缩小">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="缩小">
+                                    <span class="fa fa-search-minus"></span>
+                                </span>
+                            </button>
+                            <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="左旋转">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="左旋转">
+                                    <span class="fa fa-rotate-left"></span>
+                                </span>
+                            </button>
+                            <button type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="右旋转">
+                                <span class="docs-tooltip" data-toggle="tooltip" title="右旋转">
+                                    <span class="fa fa-rotate-right"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                <div class="avatarimg-preview s100" style="">
+                                    <img class="s100" src="@(Tools.GenerateAvatar(Model.Avatar,Model.Sex))">
+                                </div>
+                                <div class="avatarimg-preview S78" style="float: left; margin-right: 30px">
+                                    <img class="s78" src="@(Tools.GenerateAvatar(Model.Avatar,Model.Sex))">
+                                </div>
+                                <div class="avatarimg-preview S45" style="float: left; margin-right: 30px">
+                                    <img class="s45" src="@(Tools.GenerateAvatar(Model.Avatar,Model.Sex))">
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                @Html.HiddenFor(n => n.Id)
+                                <button class="btn btn-primary" type="button" id="uploadbtn">保存头像</button>
+                                <button class="btn btn-white" type="button" onclick="window.history.back(-1);">取消修改</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_header
+{
+    <!--头像上传插件-->
+    <link href="@Url.StaticFile("~/hplus/css/plugins/cropper/cropper.min.css")" rel="stylesheet" />
+}
+@section script_footer
+{
+    <!--头像上传插件-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/cropper/cropper.min.js")"></script>
+    <script type="text/javascript">
+        $(function() {
+            var $image = $('#UploadAvatarImg');
+            var options = {
+                aspectRatio: 1 / 1,
+                preview: '.avatarimg-preview',
+                crop: function(e) {
+                    // Output the result data for cropping image.
+                    //console.log(e.x);
+                    //console.log(e.y);
+                    //console.log(e.width);
+                    //console.log(e.height);
+                    //console.log(e.rotate);
+                    //console.log(e.scaleX);
+                    //console.log(e.scaleY);
+                },
+                viewMode: 1
+            };
+
+            $image.cropper(options);
+
+            // 图片选择
+            var $inputImage = $('#inputImage');
+            var URL = window.URL || window.webkitURL;
+            var blobURL;
+
+            if (URL) {
+                $inputImage.change(function() {
+                    var files = this.files;
+                    var file;
+                    if (!$image.data('cropper')) {
+                        return;
+                    }
+                    if (files && files.length) {
+                        file = files[0];
+                        if (/^image\/\w+$/.test(file.type)) {
+                            blobURL = URL.createObjectURL(file);
+                            $image.one('built.cropper', function() {
+                                // Revoke when load complete
+                                URL.revokeObjectURL(blobURL);
+                            }).cropper('reset').cropper('replace', blobURL);
+                            $inputImage.val('');
+                        } else {
+                            window.alert('Please choose an image file.');
+                        }
+                    }
+                });
+            } else {
+                $inputImage.prop('disabled', true).parent().addClass('disabled');
+            }
+
+            //菜单点击
+            $('.docs-buttons').on('click', '[data-method]', function() {
+                var $this = $(this);
+                var data = $this.data();
+                var $target;
+                var result;
+
+                if ($this.prop('disabled') || $this.hasClass('disabled')) {
+                    return;
+                }
+
+                if ($image.data('cropper') && data.method) {
+                    data = $.extend({}, data); // Clone a new one
+
+                    if (typeof data.target !== 'undefined') {
+                        $target = $(data.target);
+
+                        if (typeof data.option === 'undefined') {
+                            try {
+                                data.option = JSON.parse($target.val());
+                            } catch (e) {
+                                console.log(e.message);
+                            }
+                        }
+                    }
+                    if (data.method === 'rotate') {
+                        $image.cropper('clear');
+                    }
+                    result = $image.cropper(data.method, data.option, data.secondOption);
+
+                    if (data.method === 'rotate') {
+                        $image.cropper('crop');
+                    }
+
+                    switch (data.method) {
+                    case 'scaleX':
+                    case 'scaleY':
+                        $(this).data('option', -data.option);
+                        break;
+
+                    case 'getCroppedCanvas':
+                        if (result) {
+
+                            // Bootstrap's Modal
+                            $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+
+                            if (!$download.hasClass('disabled')) {
+                                $download.attr('href', result.toDataURL('image/jpeg'));
+                            }
+                        }
+
+                        break;
+                    }
+
+                    if ($.isPlainObject(result) && $target) {
+                        try {
+                            $target.val(JSON.stringify(result));
+                        } catch (e) {
+                            console.log(e.message);
+                        }
+                    }
+
+                }
+            });
+
+
+            /**点击保存**/
+            $("#uploadbtn").on("click", function() {
+                var result = $image.cropper('getCroppedCanvas');
+                var imageBase64 = result.toDataURL('image/jpeg');
+                tabTools.TabLoging();
+                $.post("@Url.Action("UploadAvatar", "Users")", { ImageBase64: imageBase64, Id: $("#Id").val() }, function(r) {
+                    tabTools.TabLogingClose();
+                    if (r.ResultState) {
+                        var a = layer.alert('保存成功！', { icon: 1 }, function () {
+                            layer.close(a);
+                            //tabTools.TabLoging();
+                            //window.location.reload();
+                            window.location.href = "@(Request.UrlReferrer)";
+                        });
+                    } else {
+                        var a = layer.alert('保存失败！', { icon: 2 }, function () {
+                            layer.close(a);
+                            //tabTools.TabLoging();
+                            //window.location.reload();
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,18 @@
+﻿@model List<HGShare.VWModel.UserVModel>
+@if (Model != null && Model.Count > 0)
+{
+    <h3 class="page-title">活跃用户 - TOP 12</h3>
+    <div class="user-looklog leifeng-rank">
+        <span>
+           @foreach (var item in Model)
+           {
+               <a href="@Url.Action("Home","User",new{id=item.Id})">
+                   <img src="@(HGShare.Site.Tools.GenerateAvatar(item.Avatar,78,item.Sex))">
+                   <cite>@(item.NickName??item.Name)</cite>
+                   <i>@(item.CommentNum)次回答</i>
+               </a>
+           }
+        </span>
+    </div>
+}
+

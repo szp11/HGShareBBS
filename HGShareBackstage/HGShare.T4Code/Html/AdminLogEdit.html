@@ -1,0 +1,194 @@
+@using HGShare.Site
+@model HGShare.VWModel.AdminLogVModel
+@{
+    ViewBag.Title = "修改AdminLog";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改AdminLog</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @using(Html.BeginForm("Edit", "AdminLogs", FormMethod.Post, new { @class = "form-horizontal",id="addform" }))
+                    {
+
+					 					 <div class="form-group">
+                            <label class="col-sm-3 control-label">记录编号</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Id, new { @class = "form-control", @placeholder = "请输入记录编号" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Id)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">用户ID</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.UserId, new { @class = "form-control", @placeholder = "请输入用户ID" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.UserId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">访问控制器</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Controllers, new { @class = "form-control", @placeholder = "请输入访问控制器" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Controllers)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">访问Action</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Action, new { @class = "form-control", @placeholder = "请输入访问Action" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Action)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">请求参数</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Parameter, new { @class = "form-control", @placeholder = "请输入请求参数" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Parameter)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">请求中主要ID</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.ActionId, new { @class = "form-control", @placeholder = "请输入请求中主要ID" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.ActionId)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">IP</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Ip, new { @class = "form-control", @placeholder = "请输入IP" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Ip)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">Url</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Url, new { @class = "form-control", @placeholder = "请输入Url" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Url)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">记录时间</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.InTime, new { @class = "form-control", @placeholder = "请输入记录时间" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.InTime)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">请求方法 get/post....</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.Method, new { @class = "form-control", @placeholder = "请输入请求方法 get/post...." })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.Method)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">是否是Ajax访问 0默认访问 1Ajax访问</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.IsAjax, new { @class = "form-control", @placeholder = "请输入是否是Ajax访问 0默认访问 1Ajax访问" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.IsAjax)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">UserAgent</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.UserAgent, new { @class = "form-control", @placeholder = "请输入UserAgent" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.UserAgent)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">控制器描述</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.ControllersDsc, new { @class = "form-control", @placeholder = "请输入控制器描述" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.ControllersDsc)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+													 <div class="form-group">
+                            <label class="col-sm-3 control-label">Action描述</label>
+                            <div class="col-sm-5">
+                                 @Html.TextBoxFor(n => n.ActionDsc, new { @class = "form-control", @placeholder = "请输入Action描述" })                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.ActionDsc)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+								
+
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                @Html.HiddenFor(n=>n.Id)
+                                <button class="btn btn-primary" type="submit" id="submit">保存内容</button>
+                                <button class="btn btn-white" type="button" onclick="window.history.back(-1);">取消</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_footer
+{
+    <!--表单验证-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.js?v=1.35")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.unobtrusive.js?v=1.40")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/jquery.form.js")"></script>
+    <script type="text/javascript">
+        ValidataTools.Init({
+            backurl: "@Url.Action("Index", "AdminLogs")",
+            form: $("#addform"),
+            submitbtn: $("#submit"),
+            btntext: "保存内容",
+            tipstype:"修改"
+        });
+    </script>
+}
+

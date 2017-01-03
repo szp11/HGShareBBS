@@ -1,0 +1,170 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".sql" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ include file="$(ProjectDir)\ProjectInit.ttinclude"  #>
+<# 
+	var manager = Manager.Create(Host, GenerationEnvironment); 
+	var tables=new DbHelper(Settings.DBConfig);
+#>
+<# foreach(DbTable table in tables.GetDbTables())  { #>
+<# manager.StartHeader(); #>
+<#
+	    manager.StartNewFile(table.TableName+".sql");//开始输出文件
+		List<DbColumn> columns= tables.GetDbColumns(table.TableName);
+		//得到主键信息
+		DbColumn primaryKeyCol=DbHelper.GetPrimaryKey(columns);
+		string pk=primaryKeyCol==null?"Id":primaryKeyCol.ColumnName;
+		string pktype=primaryKeyCol==null?"int":primaryKeyCol.TypeWinthLength;
+		string pkdic=primaryKeyCol==null?"Id":primaryKeyCol.Remark;
+#>
+-- =============================================
+-- Author:		<#=Settings.Author#>
+-- Create date: <#=DateTime.Now#>
+-- Description:	添加一个<#=table.TableName#>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_add<#=table.TableName#>] 
+<#foreach(DbColumn column in columns){#>
+	<#if(column.IsIdentity) continue; #>
+		@<#=column.ColumnName#> <#=column.TypeWinthLength#><# if(column.ColumnID<columns.Max(n=>n.ColumnID)){#>,<#}#>
+
+	<#}#>
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+   INSERT INTO [<#=table.TableName#>](
+		<#=DbHelper.GetNoIsIdentityFileds(columns,"[","]") #>
+	)VALUES(
+		<#=DbHelper.GetNoIsIdentityFileds(columns,"@") #>
+	)
+	SELECT SCOPE_IDENTITY()
+END
+
+
+-- =============================================
+-- Author:		<#=Settings.Author#>
+-- Create date: <#=DateTime.Now#>
+-- Description:	判断<#=table.TableName#>是否存在
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_IsExists<#=table.TableName#>]
+	@<#=pk#> <#=pktype#>
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    IF EXISTS(SELECT 1 FROM [dbo].[<#=table.TableName#>] WHERE <#=pk#> = @<#=pk#>)
+		SELECT 1
+	ELSE
+		SELECT 0
+END
+-- =============================================
+-- Author:		<#=Settings.Author#>
+-- Create date: <#=DateTime.Now#>
+-- Description:	通过<#=pkdic#>获取<#=table.TableName#>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_Get<#=table.TableName#>ListBy<#=pk#>]
+@<#=pk#> <#=pktype#>
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT TOP 1 <#=DbHelper.GetFileds(columns,"[","]")#>
+	FROM [dbo].[<#=table.TableName#>] WHERE <#=pk#>=@<#=pk#>
+END
+-- =============================================
+-- Author:		<#=Settings.Author#>
+-- Create date: <#=DateTime.Now#>
+-- Description:	通过<#=pkdic#>删除<#=table.TableName#>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_Delete<#=table.TableName#>By<#=pk#>]
+@<#=pk#> <#=pktype#>
+AS
+BEGIN
+	SET NOCOUNT ON;
+	DELETE [dbo].[<#=table.TableName#>] WHERE <#=pk#>=@<#=pk#>
+END
+-- =============================================
+-- Author:		<#=Settings.Author#>
+-- Create date: <#=DateTime.Now#>
+-- Description:	获取所有<#=table.TableName#>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_Get<#=table.TableName#>AllList]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT  <#=DbHelper.GetFileds(columns,"[","]")#>
+	FROM [dbo].[<#=table.TableName#>] 
+END
+-- =============================================
+-- Author:		<#=Settings.Author#>
+-- Create date: <#=DateTime.Now#>
+-- Description:	分页获取<#=table.TableName#>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_Get<#=table.TableName#>PageList] 
+	@PageIndex INT,
+	@PageSize INT,
+	--开始时间
+	@BeginTime DATETIME,
+	--结束时间
+	@EndTime DATETIME,
+	<#foreach(DbColumn column in columns){#>
+<#if(column.IsIdentity) continue; #>
+--<#=column.Remark#>
+	@<#=column.ColumnName#> <#=column.TypeWinthLength.ToUpper()#>,
+	<#}#>
+--总数据条数
+	@TotalCount INT OUTPUT
+AS
+BEGIN
+DECLARE 
+		@Sql NVARCHAR(MAX),
+		@Condition NVARCHAR(MAX)
+
+	SET @Condition=' WHERE 1=1'	
+	SET @Sql=''
+	
+	--时间	
+	IF @BeginTime IS NOT NULL AND @BeginTime!=''
+	BEGIN
+		SET @Condition= @Condition + ' AND [<#=table.TableName#>].CreateTime >='''+ CONVERT(varchar(20),@BeginTime,120)+''''
+	END
+	--时间
+	IF @EndTime IS NOT NULL AND @EndTime!=''		
+	BEGIN
+		SET @Condition = @Condition + ' AND [<#=table.TableName#>].CreateTime <='''+CONVERT(varchar(20),@EndTime,120)+''''
+	END
+
+	--数据量
+	SET @Sql= @Sql + 'SELECT @TotalCount=COUNT(1) FROM dbo.[<#=table.TableName#>] '
+			+@Condition		
+	
+	SET @Sql = @Sql + ' SELECT [<#=table.TableName#>].* FROM (SELECT ROW_NUMBER() OVER(ORDER BY <#=pk#> desc ) AS RowNum, [<#=table.TableName#>].*  FROM dbo.[<#=table.TableName#>]'
+			+@Condition	+') [<#=table.TableName#>] '
+	IF @PageIndex IS NOT NULL AND @PageSize IS NOT NULL
+	BEGIN
+		SET	@Sql+='WHERE  RowNum BETWEEN (@PageIndex-1)*@PageSize+1 AND @PageIndex*@PageSize '
+	END
+	
+	PRINT @Sql
+	PRINT @TotalCount
+	EXEC sp_executesql @Sql,N'@PageIndex INT,@PageSize INT,@TotalCount INT OUTPUT',@PageIndex,@PageSize,@TotalCount OUTPUT
+END
+
+<#	
+	manager.EndBlock();//结束输出
+#>
+
+<#}#>
+<#	
+   manager.Process(true);
+#>

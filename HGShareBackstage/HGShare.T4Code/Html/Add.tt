@@ -1,0 +1,114 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".html" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ include file="$(ProjectDir)\ProjectInit.ttinclude"  #>
+<# 
+	var manager = Manager.Create(Host, GenerationEnvironment); 
+	var tables=new DbHelper(Settings.DBConfig);
+#>
+<# foreach(DbTable table in tables.GetDbTables())  { #>
+<# manager.StartHeader(); #>
+<#
+	    manager.StartNewFile(table.TableName+"Add.html");//开始输出文件
+		List<DbColumn> columns= tables.GetDbColumns(table.TableName);
+		//得到主键信息
+		DbColumn primaryKeyCol=DbHelper.GetPrimaryKey(columns);
+		string pk=primaryKeyCol==null?"Id":primaryKeyCol.ColumnName;
+		string pktype=primaryKeyCol==null?"int":primaryKeyCol.TypeWinthLength;
+		string pkdic=primaryKeyCol==null?"Id":primaryKeyCol.Remark;
+#>
+@using HGShare.Site
+@model HGShare.VWModel.<#=table.TableName#>VModel
+@{
+    ViewBag.Title = "添加<#=table.TableName#>";
+    Layout = "~/Views/Shared/_HContentLayout.cshtml";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>添加<#=table.TableName#></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @using(Html.BeginForm("Add", "<#=table.TableName#>s", FormMethod.Post, new { @class = "form-horizontal",id="addform" }))
+                    {
+
+					 <#foreach(DbColumn column in columns){#>
+					 <div class="form-group">
+                            <label class="col-sm-3 control-label"><#=column.Remark#></label>
+                            <div class="col-sm-5">
+                               <#if(column.CSharpType=="bool"){#>
+							   <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.<#=column.ColumnName#>, true, new { id = "<#=column.ColumnName#>1" })
+                                    <label for="<#=column.ColumnName#>1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="radio radio-info radio-inline">
+                                    @Html.RadioButtonFor(n => n.<#=column.ColumnName#>, false, new { id = "<#=column.ColumnName#>2" })
+                                    <label for="<#=column.ColumnName#>2">
+                                        否
+                                    </label>
+                                </div>
+							   <#}else{#> @Html.TextBoxFor(n => n.<#=column.ColumnName#>, new { @class = "form-control", @placeholder = "请输入<#=column.Remark#>" })<#}#>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ValidationMessageFor(n => n.<#=column.ColumnName#>)
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+								<#}#>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-12 col-sm-offset-3">
+                                @Html.HiddenFor(n=>n.<#=pk#>)
+                                <button class="btn btn-primary" type="submit" id="submit">保存内容</button>
+                                <button class="btn btn-white" type="button" onclick="window.history.back(-1);">取消</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script_footer
+{
+    <!--表单验证-->
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.js?v=1.35")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/plugins/validate/jquery.validate.unobtrusive.js?v=1.40")"></script>
+    <script src="@Url.StaticFile("~/hplus/js/jquery.form.js")"></script>
+    <script type="text/javascript">
+        ValidataTools.Init({
+            backurl: "@Url.Action("Index", "<#=table.TableName#>s")",
+            form: $("#addform"),
+            submitbtn: $("#submit"),
+            btntext: "保存内容",
+            tipstype:"添加"
+        });
+    </script>
+}
+
+<#	
+	manager.EndBlock();//结束输出
+#>
+
+<#}#>
+<#	
+   manager.Process(true);
+#>

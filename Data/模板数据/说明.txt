@@ -1,0 +1,3 @@
+areascript 可以将layui中areas数据生成sql语句，用于插入数据库；
+邮件激活.html 邮件激活email模板；
+找回密码.html 找回密码email模板；

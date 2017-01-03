@@ -1,0 +1,4 @@
+database.bak 数据库备份，可能版本不兼容无法使用；
+script.sql 数据库脚本；
+数据库初始化.sql 一些系统初始化数据（管理员：admin 000000）；
+sqlzuoye.sql 作业；

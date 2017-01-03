@@ -1,0 +1,51 @@
+﻿@using HGShare.Common
+@model HGShare.BBS.Models.CommentEntity
+
+@{
+    var user = Model.User;
+    var comment = Model.Comment;
+}
+ <li data-id="@comment.Id" class="jieda-daan">
+     <a href="comment-@comment.Id"></a>
+    <div class="detail-about detail-about-reply">
+        @if (user != null)
+        {
+            <a class="jie-user" href="@Url.Action("Home", "User", new { id = user.Id })">
+                <img src="@HGShare.Site.Tools.GenerateAvatar(user.Avatar,45,user.Sex)" alt="@(user.NickName ?? user.Name)">
+                <cite>
+                    <i>@(user.NickName ?? user.Name)</i>
+                    <em style="color:#5FB878">(@user.RName)</em>
+                    <!-- <em style="color:#5FB878">(管理员)</em>
+                     <em style="color:#FF9E3F">（活雷锋）</em>
+                     <em style="color:#999">（该号已被封）</em> -->
+                </cite>
+            </a>
+        }
+        <div class="detail-hits">
+            <span>@DatetimeTools.DateStringFromNow(comment.CreateTime)</span>
+        </div>
+        @*<i class="iconfont icon-caina" title="最佳答案"></i>*@
+    </div>
+     <div class="detail-body jieda-body photos">
+         @if (comment.State == 1)
+         {
+             <p>@Html.Raw(comment.Content)</p>
+         }
+         else
+         {
+             <p>评论正在审核中...审核后即可显示！</p>
+         }
+     </div>
+     <div class="jieda-reply">
+         
+         <span class="jieda-zan @(Model.IsZan?"zanok":"")" type="zan" data-id="@comment.Id" data-zan="@Model.IsZan"><i class="iconfont icon-zan"></i><em>@comment.DianZanNum</em></span>
+          <span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>
+         <!--<div class="jieda-admin">
+             <span type="edit">编辑</span>
+             <span type="del">删除</span>
+             <span class="jieda-accept" type="accept">采纳</span>
+         </div> -->
+     </div>
+</li>
+
+

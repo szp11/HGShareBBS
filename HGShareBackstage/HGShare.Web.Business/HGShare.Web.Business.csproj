@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{535B234C-A0DF-437A-9545-6E61D98B08D6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HGShare.Web.Business</RootNamespace>
+    <AssemblyName>HGShare.Web.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Elasticsearch.Net">
+      <HintPath>..\..\Lib\es\net45\Elasticsearch.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Nest">
+      <HintPath>..\..\Lib\es\net45\Nest.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArticlesPublic.cs" />
+    <Compile Include="CommentsPublic.cs" />
+    <Compile Include="DB\Articles.cs" />
+    <Compile Include="DB\ArticleTypes.cs" />
+    <Compile Include="DB\Comments.cs" />
+    <Compile Include="DB\EmailTemplates.cs" />
+    <Compile Include="DB\Roles.cs" />
+    <Compile Include="DB\Users.cs" />
+    <Compile Include="DianZanLogsPublic.cs" />
+    <Compile Include="ES\Articles.cs" />
+    <Compile Include="ES\Comments.cs" />
+    <Compile Include="Login.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendMailLogsPublic.cs" />
+    <Compile Include="Upload.cs" />
+    <Compile Include="UserAccessLogsPublic.cs" />
+    <Compile Include="UserActivateTokensPublic.cs" />
+    <Compile Include="UserPublic.cs" />
+    <Compile Include="Vip.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HGShare.Business\HGShare.Business.csproj">
+      <Project>{19e508f2-7283-49fc-86be-ece79df31d27}</Project>
+      <Name>HGShare.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Com.Interface\HGShare.Com.Interface.csproj">
+      <Project>{f588f257-f3e7-4d26-83c8-55fc1e895923}</Project>
+      <Name>HGShare.Com.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Common\HGShare.Common.csproj">
+      <Project>{df322a3a-30c6-424a-8436-7a3e25a2bcc8}</Project>
+      <Name>HGShare.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.FileManager\HGShare.FileManager.csproj">
+      <Project>{eb0686fc-d748-4f68-af70-f74bb17148c9}</Project>
+      <Name>HGShare.FileManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Model\HGShare.Model.csproj">
+      <Project>{5b05e790-14c8-4fd2-a37e-4894b71e675d}</Project>
+      <Name>HGShare.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Site\HGShare.Site.csproj">
+      <Project>{e47810f2-aa92-4ad6-b9e0-3ca657e1ddb5}</Project>
+      <Name>HGShare.Site</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.VWModel\HGShare.VWModel.csproj">
+      <Project>{81c476dc-af02-4c0f-83f4-fa978bc1c959}</Project>
+      <Name>HGShare.VWModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Web.Interface\HGShare.Web.Interface.csproj">
+      <Project>{901b7013-8f30-4df9-87c2-6f3ddf9fdf48}</Project>
+      <Name>HGShare.Web.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

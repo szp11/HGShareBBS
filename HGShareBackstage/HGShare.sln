@@ -33,15 +33,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HGShare.Test", "HGShare.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HGShare.Enums", "HGShare.Enums\HGShare.Enums.csproj", "{5BD5F7FF-571D-41AD-81C5-010165367A11}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "数据文件", "数据文件", "{D6EA1C55-4F68-4F9B-8F62-134F01DB34CF}"
-	ProjectSection(SolutionItems) = preProject
-		..\数据库文件\database.bak = ..\数据库文件\database.bak
-		..\数据库文件\script.sql = ..\数据库文件\script.sql
-		..\数据库文件\sqlzuoye.sql = ..\数据库文件\sqlzuoye.sql
-		..\数据库文件\数据库初始化.sql = ..\数据库文件\数据库初始化.sql
-		..\数据库文件\说明.txt = ..\数据库文件\说明.txt
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HGShare.FileManager", "HGShare.FileManager\HGShare.FileManager.csproj", "{EB0686FC-D748-4F68-AF70-F74BB17148C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HGShare.Cache", "HGShare.Cache\HGShare.Cache.csproj", "{434760F6-94C9-4A7B-B5D1-600593EF1A7A}"
@@ -67,14 +58,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HGShare.Backstage", "HGShare.Backstage\HGShare.Backstage.csproj", "{B1244C43-7E48-46CD-853B-B537A180E7A4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entity", "Entity", "{32DDC747-B269-4D2C-BF20-40FDC2D1E6E5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "模板数据", "模板数据", "{9B2E4687-55BE-4203-BC91-93FFF77E1B8E}"
-	ProjectSection(SolutionItems) = preProject
-		..\数据库文件\模板数据\areascript.txt = ..\数据库文件\模板数据\areascript.txt
-		..\数据库文件\模板数据\找回密码.html = ..\数据库文件\模板数据\找回密码.html
-		..\数据库文件\模板数据\说明.txt = ..\数据库文件\模板数据\说明.txt
-		..\数据库文件\模板数据\邮件激活.html = ..\数据库文件\模板数据\邮件激活.html
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -186,6 +169,5 @@ Global
 		{535B234C-A0DF-437A-9545-6E61D98B08D6} = {2EA2A582-C691-4CF6-82E8-00306BF2B3D9}
 		{3765933B-F345-47D4-AE85-D4B7278416E1} = {ABD69474-6316-4A7D-A517-789BB7390D8E}
 		{B1244C43-7E48-46CD-853B-B537A180E7A4} = {1203DF7E-05D8-41A6-80A8-A18170F8F362}
-		{9B2E4687-55BE-4203-BC91-93FFF77E1B8E} = {D6EA1C55-4F68-4F9B-8F62-134F01DB34CF}
 	EndGlobalSection
 EndGlobal

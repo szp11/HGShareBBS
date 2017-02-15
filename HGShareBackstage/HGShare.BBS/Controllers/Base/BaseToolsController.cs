@@ -11,7 +11,7 @@ namespace HGShare.BBS.Controllers.Base
         /// </summary>
         public static IIcoReader IcoReader;
 
-        public BaseToolsController()
+        static BaseToolsController()
         {
             if(IcoReader==null)
                 IcoReader=new IocContainer();

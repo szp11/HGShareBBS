@@ -1,5 +1,8 @@
-﻿using HGShare.Container;
+﻿using HGShare.Common;
+using HGShare.Container;
 using HGShare.Log;
+using HGShare.Site.Config;
+using HGShare.Utils.FileCloud;
 using HGShare.Utils.Interface;
 using HGShare.Utils.Mail;
 using HGShare.Utils.VerifyCode;
@@ -40,15 +43,27 @@ namespace HGShare.Web.ServiceManager
                 .Register<IDianZanLogsPublic, DianZanLogsPublic>()
                 .Register<IUserAccessLogsPublic, UserAccessLogsPublic>()
 
-                .Register<ILog, Log4Net>()
-                .Register<IMail, SmtpMail>()
+                .Register<ILog>(_ => new Log4Net("Logger"))
+                .Register<IFileCloud>(_ => new QiNiu(new QiNiuConfig
+                {
+                    Ak = WebSysConfig.QiNiuAk,
+                    Sk = WebSysConfig.QiNiuSk
+                }))
+                .Register<IMail>(_=>new SmtpMail(new SmtpMailConfig
+                {
+                    MailServer = Configuration.AppSettings("MailServer"),
+                    MailUserName = Configuration.AppSettings("MailUserName"),
+                    MailPassword = Configuration.AppSettings("MailPassword"),
+                    MailName = Configuration.AppSettings("MailName"),
+                    Port = int.Parse(Configuration.AppSettings("Port"))
+                }))
                 .Register<IVerifyCode, SimpleVerifyCode>();
 
             if (Site.Config.EsIndexConfig.IsUseEsData)
             {
                 _container
-                    .Register<IArticles, Web.Business.ES.Articles>()
-                    .Register<IComments, Web.Business.ES.Comments>();
+                    .Register<IArticles, Business.ES.Articles>()
+                    .Register<IComments, Business.ES.Comments>();
             }
             else
             {

@@ -48,6 +48,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HGShare.Common\HGShare.Common.csproj">
+      <Project>{df322a3a-30c6-424a-8436-7a3e25a2bcc8}</Project>
+      <Name>HGShare.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HGShare.Container\HGShare.Container.csproj">
       <Project>{ac88188c-fcc1-44dc-aa5b-52f1639d19e4}</Project>
       <Name>HGShare.Container</Name>

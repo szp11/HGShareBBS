@@ -31,7 +31,9 @@ namespace HGShare.Backstage.Controllers.Base
             //检测登陆状态
             var userInfo = Users.GetCurrentLoginUserInfo();
             //log
+#pragma warning disable 4014
             AddActionLogAsync(filterContext, userInfo);
+#pragma warning restore 4014
             if (userInfo == null)
             {
                 Users.LogOut();//无法得到用户信息就登出清空原有cookie再次登陆
@@ -84,7 +86,9 @@ namespace HGShare.Backstage.Controllers.Base
         /// <param name="filterContext"></param>
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            UpdateUserLoginAndActionTimeAsync(filterContext, CurrentUserInfo);
+#pragma warning disable 4014
+            UpdateUserLoginAndActionTimeAsync(filterContext: filterContext, userInfo: CurrentUserInfo);
+#pragma warning restore 4014
         }
 
         /// <summary>

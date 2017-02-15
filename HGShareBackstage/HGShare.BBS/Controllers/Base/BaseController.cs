@@ -13,7 +13,6 @@ namespace HGShare.BBS.Controllers.Base
     {
         private static readonly ILogin UsersLogin = IcoReader.Service<ILogin>();
         private static readonly IUsers Users = IcoReader.Service<IUsers>();
-        private static readonly IUserAccessLogsPublic UserAccessLogsPublic = IcoReader.Service<IUserAccessLogsPublic>();
         public static ILog Log = IcoReader.Service<ILog>("configName", "Logger");
         /// <summary>
         /// 当前登录用户的cookie存储信息

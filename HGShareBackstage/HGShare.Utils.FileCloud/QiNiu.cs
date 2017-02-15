@@ -1,7 +1,9 @@
 ﻿using System;
 using HGShare.Utils.Interface;
 using Qiniu.Http;
-using Qiniu.Storage;
+using Qiniu.IO;
+using Qiniu.IO.Model;
+using Qiniu.RS;
 using Qiniu.Util;
 
 namespace HGShare.Utils.FileCloud
@@ -13,9 +15,8 @@ namespace HGShare.Utils.FileCloud
         public QiNiu(QiNiuConfig config)
         {
             _config = config;
-            _config = new QiNiuConfig();
             if (string.IsNullOrEmpty(_config.Ak) || string.IsNullOrEmpty(_config.Sk))
-                throw new Exception("七牛云配置项为配置！");
+                throw new Exception("七牛云配置项为空！");
             _mac = new Mac(_config.Ak, _config.Sk); 
         }
         /// <summary>
@@ -28,7 +29,7 @@ namespace HGShare.Utils.FileCloud
         {
             
             if(string.IsNullOrEmpty(_config.Ak) || string.IsNullOrEmpty(_config.Sk))
-                throw new Exception("七牛云配置项为配置！");
+                throw new Exception("七牛云配置项为空！");
 
             // 上传策略
             var putPolicy = new PutPolicy
@@ -41,10 +42,10 @@ namespace HGShare.Utils.FileCloud
             // 上传策略的过期时间(单位:秒)
             putPolicy.SetExpires(3600);
             // 生成上传凭证
-            string uploadToken = Auth.createUploadToken(putPolicy, _mac);
+            string uploadToken = Auth.CreateUploadToken(_mac,putPolicy.ToJsonString());
             // 开始上传文件
             var um = new UploadManager();
-            um.uploadFile(localFilePath, fileName, uploadToken, null, null);
+            um.UploadFile(localFilePath, fileName, uploadToken);
         }
         /// <summary>
         /// 删除文件
@@ -55,7 +56,7 @@ namespace HGShare.Utils.FileCloud
         {
             var bm = new BucketManager(_mac);
             // 返回结果存储在result中
-            HttpResult result = bm.delete(bucketName, fileName);
+            HttpResult result = bm.Delete(bucketName, fileName);
         }
     }
     /// <summary>

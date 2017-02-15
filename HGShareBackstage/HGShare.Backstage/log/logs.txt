@@ -1,0 +1,19 @@
+------------begin--------------
+2017-02-15 18:05:52,471 [99] INFO  Logger [(null)] - {"Id":0,"UserId":11007,"Controllers":"home","Action":"Index","Parameter":"{}","ActionId":"","Ip":"127.0.0.1","Url":"http://fly.com/Manager/home","InTime":"2017-02-15T18:05:52.4648963+08:00","Method":"get","IsAjax":false,"UserAgent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.2141.400 QQBrowser/9.5.10219.400","ControllersDsc":"系统框架","ActionDsc":"首页"}
+2017-02-15 18:05:58,355 [98] INFO  Logger [(null)] - {"Id":0,"UserId":11007,"Controllers":"home","Action":"main","Parameter":"{}","ActionId":"","Ip":"127.0.0.1","Url":"http://fly.com/Manager/home/main","InTime":"2017-02-15T18:05:58.3554853+08:00","Method":"get","IsAjax":false,"UserAgent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.2141.400 QQBrowser/9.5.10219.400","ControllersDsc":"系统框架","ActionDsc":"主页"}
+2017-02-15 18:07:30,763 [99] INFO  Logger [(null)] - {"Id":0,"UserId":11007,"Controllers":"Articles","Action":"Index","Parameter":"{\"page\":null}","ActionId":"","Ip":"127.0.0.1","Url":"http://fly.com/Manager/Articles/Index?v=4.0","InTime":"2017-02-15T18:07:30.7627251+08:00","Method":"get","IsAjax":false,"UserAgent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.2141.400 QQBrowser/9.5.10219.400","ControllersDsc":"文章管理","ActionDsc":"文章列表"}
+2017-02-15 18:07:37,191 [103] INFO  Logger [(null)] - {"Id":0,"UserId":11007,"Controllers":"Articles","Action":"Edit","Parameter":"{\"id\":1}","ActionId":"1","Ip":"127.0.0.1","Url":"http://fly.com/Manager/Articles/Edit?Id=1","InTime":"2017-02-15T18:07:37.1913679+08:00","Method":"get","IsAjax":false,"UserAgent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.2141.400 QQBrowser/9.5.10219.400","ControllersDsc":"文章管理","ActionDsc":"修改文章页面"}
+2017-02-15 18:07:47,789 [99] INFO  Logger [(null)] - {"Id":0,"UserId":11007,"Controllers":"ArticleTypes","Action":"Index","Parameter":"{\"page\":null}","ActionId":"","Ip":"127.0.0.1","Url":"http://fly.com/Manager/ArticleTypes/Index?v=4.0","InTime":"2017-02-15T18:07:47.7884275+08:00","Method":"get","IsAjax":false,"UserAgent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.2141.400 QQBrowser/9.5.10219.400","ControllersDsc":"文章类型管理","ActionDsc":"文章类型列表"}
+-------------end---------------
+------------begin--------------
+-------------end---------------
+------------begin--------------
+-------------end---------------
+------------begin--------------
+-------------end---------------
+------------begin--------------
+-------------end---------------
+------------begin--------------
+-------------end---------------
+------------begin--------------
+-------------end---------------

@@ -5,12 +5,13 @@ using HGShare.BBS.Controllers.Base;
 using HGShare.Site.ActionResult;
 using HGShare.VWModel;
 using HGShare.Web.Interface;
+using HGShare.Web.ServiceManager;
 
 namespace HGShare.BBS.Controllers
 {
     public class ArticleTypeController : BaseController
     {
-        private static readonly IArticleTypes ArticleTypes = IocContainer.Service<IArticleTypes>();
+        private static readonly IArticleTypes ArticleTypes = IcoReader.Service<IArticleTypes>();
         // GET: ArticleType
         public ActionResult Index()
         {

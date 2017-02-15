@@ -70,10 +70,6 @@
       <Project>{19e508f2-7283-49fc-86be-ece79df31d27}</Project>
       <Name>HGShare.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HGShare.Com.Interface\HGShare.Com.Interface.csproj">
-      <Project>{f588f257-f3e7-4d26-83c8-55fc1e895923}</Project>
-      <Name>HGShare.Com.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HGShare.Common\HGShare.Common.csproj">
       <Project>{df322a3a-30c6-424a-8436-7a3e25a2bcc8}</Project>
       <Name>HGShare.Common</Name>
@@ -89,6 +85,10 @@
     <ProjectReference Include="..\HGShare.Site\HGShare.Site.csproj">
       <Project>{e47810f2-aa92-4ad6-b9e0-3ca657e1ddb5}</Project>
       <Name>HGShare.Site</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Utils.Interface\HGShare.Utils.Interface.csproj">
+      <Project>{1f8ff75b-62ed-46ce-8ec7-c5255c44173b}</Project>
+      <Name>HGShare.Utils.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\HGShare.VWModel\HGShare.VWModel.csproj">
       <Project>{81c476dc-af02-4c0f-83f4-fa978bc1c959}</Project>

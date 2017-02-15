@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Web.Mvc;
 using HGShare.BBS.Controllers.Base;
-using HGShare.Com.Interface;
 using HGShare.Site;
 using HGShare.Site.ActionResult;
+using HGShare.Utils.Interface;
 using HGShare.VWModel;
 using HGShare.Web.Interface;
 
@@ -12,9 +12,9 @@ namespace HGShare.BBS.Controllers
     [Description("Vip出入口")]
     public class VipController : BaseController
     {
-        private static readonly ILogin UsersLogin = IocContainer.Service<ILogin>();
-        private static readonly IVip Vip = IocContainer.Service<IVip>();
-        private static readonly IVerifyCode VerCode = IocContainer.Service<IVerifyCode>();
+        private static readonly ILogin UsersLogin = IcoReader.Service<ILogin>();
+        private static readonly IVip Vip = IcoReader.Service<IVip>();
+        private static readonly IVerifyCode VerCode = IcoReader.Service<IVerifyCode>();
         /// <summary>
         /// 登陆页
         /// </summary>

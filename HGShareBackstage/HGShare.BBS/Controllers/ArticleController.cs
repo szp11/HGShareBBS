@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using HGShare.BBS.Controllers.Base;
 using HGShare.BBS.Models;
 using HGShare.BBS.Models.Search;
-using HGShare.Com.Interface;
 using HGShare.Site;
 using HGShare.Site.ActionResult;
+using HGShare.Utils.Interface;
 using HGShare.VWModel;
 using HGShare.Web.Interface;
 using Webdiyer.WebControls.Mvc;
@@ -20,13 +19,13 @@ namespace HGShare.BBS.Controllers
     /// </summary>
     public class ArticleController : BaseController
     {
-        private static readonly IArticles Articles = IocContainer.Service<IArticles>();
-        private static readonly IArticlesPublic ArticlesPublic = IocContainer.Service<IArticlesPublic>();
-        private static readonly IArticleTypes ArticleTypes = IocContainer.Service<IArticleTypes>();
-        private static readonly IUsers Users = IocContainer.Service<IUsers>();
-        private static readonly IVerifyCode VerCode = IocContainer.Service<IVerifyCode>();
-        private static readonly IUsersPublic UserPublic = IocContainer.Service<IUsersPublic>();
-        private static readonly IRoles Roles = IocContainer.Service<IRoles>();
+        private static readonly IArticles Articles = IcoReader.Service<IArticles>();
+        private static readonly IArticlesPublic ArticlesPublic = IcoReader.Service<IArticlesPublic>();
+        private static readonly IArticleTypes ArticleTypes = IcoReader.Service<IArticleTypes>();
+        private static readonly IUsers Users = IcoReader.Service<IUsers>();
+        private static readonly IVerifyCode VerCode = IcoReader.Service<IVerifyCode>();
+        private static readonly IUsersPublic UserPublic = IcoReader.Service<IUsersPublic>();
+        private static readonly IRoles Roles = IcoReader.Service<IRoles>();
         /// <summary>
         /// 文章列表
         /// </summary>

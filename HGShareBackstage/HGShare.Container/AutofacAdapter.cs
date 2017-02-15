@@ -1,7 +1,8 @@
 ﻿using System;
 using Autofac;
-using Autofac.Core;
-using Autofac.Core.Activators.Reflection;
+using HGShare.Utils.Interface;
+using IContainer = HGShare.Utils.Interface.IContainer;
+using IServiceProvider = HGShare.Utils.Interface.IServiceProvider;
 
 namespace HGShare.Container
 {
@@ -82,10 +83,10 @@ namespace HGShare.Container
             return Container.Resolve<TService>(new NamedParameter(parameterName,parameterValue));
         }
 
-        public TService Resolve<TService>(Parameter[] parameters) where TService : class
-        {
-            return Container.Resolve<TService>(parameters);
-        }
+        //public TService Resolve<TService>(Parameter[] parameters) where TService : class
+        //{
+        //    return Container.Resolve<TService>(parameters);
+        //}
         public void Dispose()
         {
             if (_ownsContainer && _container != null)

@@ -2,8 +2,8 @@
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
-using HGShare.Com.Interface;
 using HGShare.Site.Config;
+using HGShare.Utils.Interface;
 
 namespace HGShare.FileManager.Avatar
 {
@@ -12,22 +12,23 @@ namespace HGShare.FileManager.Avatar
     /// </summary>
     public class UploadAvatar
     {
-        private static  IFileCloud _fileCloud ;
+        private readonly IFileCloud _fileCloud ;
 
         private readonly string _savePath;
         public readonly string FileName;
         private readonly string _imageBase64;
         private readonly int [] _thumbnail;
 
-        public UploadAvatar()
+        public UploadAvatar(IFileCloud fileCloud)
         {
+            _fileCloud = fileCloud;
             _savePath = FileTools.GetFilePath(DirectoriesConfig.UserAvatarPath);
             FileName = string.Format("{0}.{1}", Guid.NewGuid().ToString().Replace("-", ""), WebSysConfig.AvatarFormat);
             _thumbnail = WebSysConfig.AvatarThumbnailSizes;
-            _fileCloud = FileCloudService.GetFileCloudService();
         }
 
-        public UploadAvatar(string base64):this()
+        public UploadAvatar(string base64, IFileCloud fileCloud)
+            : this(fileCloud)
         {
             _imageBase64 = base64;
         }

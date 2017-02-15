@@ -1,5 +1,6 @@
 ﻿using System;
 using log4net;
+using ILog = HGShare.Utils.Interface.ILog;
 
 namespace HGShare.Log
 {

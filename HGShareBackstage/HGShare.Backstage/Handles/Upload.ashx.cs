@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Text;
 using System.Web;
+using HGShare.Backstage.Controllers.Base;
 using HGShare.Business;
-using HGShare.Enums;
 using HGShare.FileManager.Upload;
-using HGShare.Log;
 using HGShare.Model;
 using HGShare.Site.ActionResult;
 using HGShare.Site.Config;
+using HGShare.Utils.Interface;
 using Newtonsoft.Json;
 
 namespace HGShare.Backstage.Handles
@@ -17,7 +17,7 @@ namespace HGShare.Backstage.Handles
     /// </summary>
     public class Upload : IHttpHandler
     {
-        private static readonly ILog Log = IocContainer.LogService();
+        private static readonly ILog Log = LogBaseController.Log;
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";

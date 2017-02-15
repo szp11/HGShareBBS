@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILog.cs" />
     <Compile Include="Log4Net.cs" />
     <Compile Include="LogBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,6 +50,12 @@
   <ItemGroup>
     <None Include="ConfigTemplet\log4net.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HGShare.Utils.Interface\HGShare.Utils.Interface.csproj">
+      <Project>{1f8ff75b-62ed-46ce-8ec7-c5255c44173b}</Project>
+      <Name>HGShare.Utils.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

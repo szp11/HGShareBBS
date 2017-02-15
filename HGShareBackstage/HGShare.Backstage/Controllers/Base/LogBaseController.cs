@@ -3,11 +3,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Autofac;
-using Autofac.Core;
 using HGShare.Business;
 using HGShare.Log;
 using HGShare.Model;
+using HGShare.Utils.Interface;
 using Newtonsoft.Json;
 
 namespace HGShare.Backstage.Controllers.Base
@@ -17,7 +16,13 @@ namespace HGShare.Backstage.Controllers.Base
         /// <summary>
         /// 日志记录器
         /// </summary>
-        public static ILog Log = IocContainer.LogService();
+        public static ILog Log;
+
+        public LogBaseController()
+        {
+            if (Log==null)
+                Log = new Log4Net("Logger");
+        }
 
         #region 异常处理
         /// <summary>

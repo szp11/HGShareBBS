@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using HGShare.Site.ActionResult;
-using HGShare.VWModel;
-using HGShare.Web.Interface;
+using HGShare.Web.ServiceManager;
 
 namespace HGShare.BBS.Controllers.Base
 {
     public class BaseToolsController : Controller
     {
+        /// <summary>
+        /// 容器读取
+        /// </summary>
+        public static IIcoReader IcoReader;
+
+        public BaseToolsController()
+        {
+            if(IcoReader==null)
+                IcoReader=new IocContainer();
+        }
+
         #region 自动返回类型
 
         /// <summary>

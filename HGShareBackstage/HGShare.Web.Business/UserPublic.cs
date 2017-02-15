@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using HGShare.Business;
-using HGShare.Com.Interface;
+using HGShare.Utils.Interface;
 using HGShare.VWModel;
 using HGShare.Web.Interface;
 
@@ -146,7 +146,7 @@ namespace HGShare.Web.Business
             {
                 UserId=userId,
                 Body = body,
-                FromEmail = _mail.MailUserName,
+                FromEmail = _mail.GetFromEmail(),
                 TemplateId = 0,
                 Ip=ip,
                 Title = subject,
@@ -180,7 +180,7 @@ namespace HGShare.Web.Business
             {
                 UserId = userId,
                 Body = body,
-                FromEmail = _mail.MailUserName,
+                FromEmail = _mail.GetFromEmail(),
                 TemplateId = 0,
                 Ip = ip,
                 Title = subject,
@@ -222,7 +222,7 @@ namespace HGShare.Web.Business
             {
                 UserId = userId,
                 Body = emalitemplate.Template,
-                FromEmail = _mail.MailUserName,
+                FromEmail = _mail.GetFromEmail(),
                 TemplateId = templateId,
                 Ip = ip,
                 Title = emalitemplate.Title,
@@ -265,7 +265,7 @@ namespace HGShare.Web.Business
             {
                 UserId = userId,
                 Body = emalitemplate.Template,
-                FromEmail = _mail.MailUserName,
+                FromEmail = _mail.GetFromEmail(),
                 TemplateId = templateId,
                 Ip = ip,
                 Title = emalitemplate.Title,

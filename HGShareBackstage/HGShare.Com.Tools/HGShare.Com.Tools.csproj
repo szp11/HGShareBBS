@@ -46,10 +46,6 @@
     <Compile Include="VerifyCode\SimpleVerifyCode.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HGShare.Com.Interface\HGShare.Com.Interface.csproj">
-      <Project>{f588f257-f3e7-4d26-83c8-55fc1e895923}</Project>
-      <Name>HGShare.Com.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HGShare.Common\HGShare.Common.csproj">
       <Project>{df322a3a-30c6-424a-8436-7a3e25a2bcc8}</Project>
       <Name>HGShare.Common</Name>

@@ -214,7 +214,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IocContainer.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminLogsController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
@@ -307,10 +306,6 @@
       <Project>{df322a3a-30c6-424a-8436-7a3e25a2bcc8}</Project>
       <Name>HGShare.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HGShare.Container\HGShare.Container.csproj">
-      <Project>{ac88188c-fcc1-44dc-aa5b-52f1639d19e4}</Project>
-      <Name>HGShare.Container</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HGShare.Enums\HGShare.Enums.csproj">
       <Project>{5bd5f7ff-571d-41ad-81c5-010165367a11}</Project>
       <Name>HGShare.Enums</Name>
@@ -330,6 +325,14 @@
     <ProjectReference Include="..\HGShare.Site\HGShare.Site.csproj">
       <Project>{e47810f2-aa92-4ad6-b9e0-3ca657e1ddb5}</Project>
       <Name>HGShare.Site</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Utils.FileCloud\HGShare.Utils.FileCloud.csproj">
+      <Project>{d84b52c8-b358-44cf-947f-88007c21fb00}</Project>
+      <Name>HGShare.Utils.FileCloud</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HGShare.Utils.Interface\HGShare.Utils.Interface.csproj">
+      <Project>{1f8ff75b-62ed-46ce-8ec7-c5255c44173b}</Project>
+      <Name>HGShare.Utils.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\HGShare.VWModel\HGShare.VWModel.csproj">
       <Project>{81c476dc-af02-4c0f-83f4-fa978bc1c959}</Project>

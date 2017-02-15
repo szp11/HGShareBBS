@@ -1,32 +1,33 @@
-﻿using HGShare.Com.Interface;
-using HGShare.Com.Tools.Mail;
-using HGShare.Com.Tools.VerifyCode;
-using HGShare.Container;
+﻿using HGShare.Container;
 using HGShare.Log;
+using HGShare.Utils.Interface;
+using HGShare.Utils.Mail;
+using HGShare.Utils.VerifyCode;
 using HGShare.Web.Business;
 using HGShare.Web.Business.DB;
 using HGShare.Web.Interface;
 
-namespace HGShare.BBS
+namespace HGShare.Web.ServiceManager
 {
-    public class IocContainer
+    public class IocContainer:IIcoReader
     {
-        private static readonly IContainer Container = new AutofacAdapter();
+        private static IContainer _container;
         /// <summary>
         /// 注册实现
         /// </summary>
-        public static void RegisterServices()
+        public IocContainer()
         {
-            Container
-                .Register(_ => Container)
-
-
+            if (_container!=null)
+                return;
+            _container = new AutofacAdapter();
+            _container
+                .Register(_ => _container)
 
                 .Register<IArticleTypes, ArticleTypes>()
-                
+
                 .Register<IUsers, Users>()
                 .Register<IRoles, Roles>()
-               
+
                 .Register<IUsersPublic, UserPublic>()
                 .Register<ICommentsPublic, CommentsPublic>()
                 .Register<IUpload, Upload>()
@@ -45,13 +46,13 @@ namespace HGShare.BBS
 
             if (Site.Config.EsIndexConfig.IsUseEsData)
             {
-                Container
+                _container
                     .Register<IArticles, Web.Business.ES.Articles>()
                     .Register<IComments, Web.Business.ES.Comments>();
             }
             else
             {
-                Container
+                _container
                     .Register<IArticles, Articles>()
                     .Register<IComments, Comments>();
             }
@@ -63,17 +64,17 @@ namespace HGShare.BBS
         /// 实现
         /// </summary>
         /// <returns></returns>
-        public static T Service<T>() where T : class
+        public T Service<T>() where T : class
         {
-            return Container.Resolve<T>();
+            return _container.Resolve<T>();
         }
         /// <summary>
         /// 实现
         /// </summary>
         /// <returns></returns>
-        public static T Service<T>(string parameterName, object parameterValue) where T : class
+        public T Service<T>(string parameterName, object parameterValue) where T : class
         {
-            return Container.Resolve<T>(parameterName,parameterValue);
+            return _container.Resolve<T>(parameterName, parameterValue);
         }
         #endregion
     }

@@ -1,19 +1,20 @@
 ﻿using System.Globalization;
 using System.Web.Mvc;
-using HGShare.Log;
 using HGShare.Site;
 using HGShare.Site.Config;
+using HGShare.Utils.Interface;
 using HGShare.VWModel;
 using HGShare.Web.Interface;
+using HGShare.Web.ServiceManager;
 
 namespace HGShare.BBS.Controllers.Base
 {
     public class BaseController : BaseToolsController
     {
-        private static readonly ILogin UsersLogin = IocContainer.Service<ILogin>();
-        private static readonly IUsers Users = IocContainer.Service<IUsers>();
-        private static readonly IUserAccessLogsPublic UserAccessLogsPublic = IocContainer.Service<IUserAccessLogsPublic>();
-        public static ILog Log = IocContainer.Service<ILog>("configName", "Logger");
+        private static readonly ILogin UsersLogin = IcoReader.Service<ILogin>();
+        private static readonly IUsers Users = IcoReader.Service<IUsers>();
+        private static readonly IUserAccessLogsPublic UserAccessLogsPublic = IcoReader.Service<IUserAccessLogsPublic>();
+        public static ILog Log = IcoReader.Service<ILog>("configName", "Logger");
         /// <summary>
         /// 当前登录用户的cookie存储信息
         /// </summary>

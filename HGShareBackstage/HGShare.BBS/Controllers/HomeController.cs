@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using HGShare.BBS.Controllers.Base;
 using HGShare.BBS.Models;
@@ -15,9 +12,9 @@ namespace HGShare.BBS.Controllers
     /// </summary>
     public class HomeController : BaseController
     {
-        private static readonly IArticles Articles = IocContainer.Service<IArticles>();
-        private static readonly IArticleTypes ArticleTypes = IocContainer.Service<IArticleTypes>();
-        private static readonly IUsers Users = IocContainer.Service<IUsers>();
+        private static readonly IArticles Articles = IcoReader.Service<IArticles>();
+        private static readonly IArticleTypes ArticleTypes = IcoReader.Service<IArticleTypes>();
+        private static readonly IUsers Users = IcoReader.Service<IUsers>();
 
         /// <summary>
         /// 主页面

@@ -1,7 +1,6 @@
 ﻿using System;
-using Autofac.Core;
 
-namespace HGShare.Container
+namespace HGShare.Utils.Interface
 {
     /// <summary>
     /// IOC容器接口
@@ -36,7 +35,7 @@ namespace HGShare.Container
         /// <param name="parameters">参数集合</param>
         /// <typeparam name="TService">返回的服务的类型</typeparam>
         /// <returns>服务的实现</returns>
-        TService Resolve<TService>(Parameter[] parameters) where TService : class;
+        ///TService Resolve<TService>(Parameter[] parameters) where TService : class;
     }
 
     /// <summary>

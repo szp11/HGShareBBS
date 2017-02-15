@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HGShare.Log
+namespace HGShare.Utils.Interface
 {
     /// <summary>
     /// log 接口

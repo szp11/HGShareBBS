@@ -1,5 +1,6 @@
 /.svn
 /Private
-/HGShareBackstage/HGShare.BBS/obj
-/HGShareBackstage/HGShare.Backstage/obj
+/HGShareBackstage/packages
+/HGShareBackstage/*/obj
+/HGShareBackstage/*/bin
 HGShareBackstage/HGShare.v12.suo

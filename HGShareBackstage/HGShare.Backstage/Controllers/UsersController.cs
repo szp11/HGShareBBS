@@ -8,6 +8,7 @@ using HGShare.FileManager.Avatar;
 using HGShare.Site;
 using HGShare.Site.ActionResult;
 using HGShare.Site.Config;
+using HGShare.Utils.FileCloud;
 using HGShare.VWModel;
 using Webdiyer.WebControls.Mvc;
 
@@ -273,7 +274,11 @@ namespace HGShare.Backstage.Controllers
         {
             try
             {
-                var uploadAvatar = new UploadAvatar(model.ImageBase64);
+                var uploadAvatar = new UploadAvatar(model.ImageBase64,new QiNiu(new QiNiuConfig
+                {
+                    Ak = WebSysConfig.QiNiuAk,
+                    Sk = WebSysConfig.QiNiuSk
+                }));
                 uploadAvatar.Save();
                 string oldFile = string.Empty;
                 var user = Users.GetUserInfo(model.Id);

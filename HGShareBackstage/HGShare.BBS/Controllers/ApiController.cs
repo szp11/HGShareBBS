@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
 using HGShare.BBS.Controllers.Base;
-using HGShare.Com.Interface;
 using HGShare.Common;
+using HGShare.Utils.Interface;
 using HGShare.VWModel;
 using HGShare.Web.Interface;
 
@@ -12,8 +12,8 @@ namespace HGShare.BBS.Controllers
 {
     public class ApiController : BaseController
     {
-        private static readonly IUserAccessLogsPublic UserAccessLogsPublic = IocContainer.Service<IUserAccessLogsPublic>();
-        private static readonly IVerifyCode VerCode = IocContainer.Service<IVerifyCode>();
+        private static readonly IUserAccessLogsPublic UserAccessLogsPublic = IcoReader.Service<IUserAccessLogsPublic>();
+        private static readonly IVerifyCode VerCode = IcoReader.Service<IVerifyCode>();
 
         /// <summary>
         /// 跳转至指定位置

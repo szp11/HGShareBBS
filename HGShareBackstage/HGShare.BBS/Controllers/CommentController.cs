@@ -13,12 +13,12 @@ namespace HGShare.BBS.Controllers
 {
     public class CommentController : BaseController
     {
-        private static readonly IUsers Users = IocContainer.Service<IUsers>();
-        private static readonly IComments Comments = IocContainer.Service<IComments>();
-        private static readonly ICommentsPublic CommentsPublic = IocContainer.Service<ICommentsPublic>();
-        private static readonly IDianZanLogsPublic DianZanLogsPublic = IocContainer.Service<IDianZanLogsPublic>();
-        private static readonly IRoles Roles = IocContainer.Service<IRoles>();
-        private static readonly IArticles Articles = IocContainer.Service<IArticles>();
+        private static readonly IUsers Users = IcoReader.Service<IUsers>();
+        private static readonly IComments Comments = IcoReader.Service<IComments>();
+        private static readonly ICommentsPublic CommentsPublic = IcoReader.Service<ICommentsPublic>();
+        private static readonly IDianZanLogsPublic DianZanLogsPublic = IcoReader.Service<IDianZanLogsPublic>();
+        private static readonly IRoles Roles = IcoReader.Service<IRoles>();
+        private static readonly IArticles Articles = IcoReader.Service<IArticles>();
         /// <summary>
         /// 
         /// </summary>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using HGShare.BBS.Controllers.Base;
 using HGShare.Site.ActionResult;
 using HGShare.VWModel;
@@ -12,8 +8,8 @@ namespace HGShare.BBS.Controllers
 {
     public class DianZanController : BaseController
     {
-        private static readonly IDianZanLogsPublic DianZanLogsPublic = IocContainer.Service<IDianZanLogsPublic>();
-        private static readonly ICommentsPublic CommentsPublic = IocContainer.Service<ICommentsPublic>();
+        private static readonly IDianZanLogsPublic DianZanLogsPublic = IcoReader.Service<IDianZanLogsPublic>();
+        private static readonly ICommentsPublic CommentsPublic = IcoReader.Service<ICommentsPublic>();
 
         /// <summary>
         /// 评论点赞

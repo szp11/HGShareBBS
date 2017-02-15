@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using HGShare.BBS.Controllers.Base;
 using HGShare.BBS.Models;
-using HGShare.Com.Interface;
 using HGShare.Site;
 using HGShare.Site.ActionResult;
 using HGShare.Site.Config;
 using HGShare.Site.Token;
+using HGShare.Utils.Interface;
 using HGShare.VWModel;
 using HGShare.Web.Interface;
 using Webdiyer.WebControls.Mvc;
@@ -18,15 +18,15 @@ namespace HGShare.BBS.Controllers
 {
     public class UserController : BaseController
     {
-        private static readonly IUsers Users = IocContainer.Service<IUsers>();
-        private static readonly IUsersPublic UserPublic = IocContainer.Service<IUsersPublic>();
-        private static readonly IUpload Upload = IocContainer.Service<IUpload>();
-        private static readonly ILogin UsersLogin = IocContainer.Service<ILogin>();
-        private static readonly IUserActivateTokensPublic UserActivateTokensPublic = IocContainer.Service<IUserActivateTokensPublic>();
-        private static readonly ISendMailLogsPublic SendMailLogsPublic = IocContainer.Service<ISendMailLogsPublic>();
-        private static readonly IVerifyCode VerCode = IocContainer.Service<IVerifyCode>();
-        private static readonly IArticles Articles = IocContainer.Service<IArticles>();
-        private static readonly IComments Comments = IocContainer.Service<IComments>();
+        private static readonly IUsers Users = IcoReader.Service<IUsers>();
+        private static readonly IUsersPublic UserPublic = IcoReader.Service<IUsersPublic>();
+        private static readonly IUpload Upload = IcoReader.Service<IUpload>();
+        private static readonly ILogin UsersLogin = IcoReader.Service<ILogin>();
+        private static readonly IUserActivateTokensPublic UserActivateTokensPublic = IcoReader.Service<IUserActivateTokensPublic>();
+        private static readonly ISendMailLogsPublic SendMailLogsPublic = IcoReader.Service<ISendMailLogsPublic>();
+        private static readonly IVerifyCode VerCode = IcoReader.Service<IVerifyCode>();
+        private static readonly IArticles Articles = IcoReader.Service<IArticles>();
+        private static readonly IComments Comments = IcoReader.Service<IComments>();
 
         /// <summary>
         /// 用户主页（是可以被任何人看到的，包括游客蜘蛛，内容使用同步加载）

@@ -1,0 +1,619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>E:\WebSite\HGManager</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Autofac.dll">
+      <publishTime>02/15/2017 15:06:46</publishTime>
+    </File>
+    <File Include="bin/ChnCharInfo.dll">
+      <publishTime>01/03/2017 15:51:03</publishTime>
+    </File>
+    <File Include="bin/Dapper.dll">
+      <publishTime>02/15/2017 15:07:37</publishTime>
+    </File>
+    <File Include="bin/Elasticsearch.Net.dll">
+      <publishTime>01/03/2017 15:51:00</publishTime>
+    </File>
+    <File Include="bin/HGShare.Backstage.dll">
+      <publishTime>02/16/2017 14:37:23</publishTime>
+    </File>
+    <File Include="bin/HGShare.Business.dll">
+      <publishTime>02/16/2017 14:34:04</publishTime>
+    </File>
+    <File Include="bin/HGShare.Common.dll">
+      <publishTime>02/16/2017 14:33:45</publishTime>
+    </File>
+    <File Include="bin/HGShare.DataProvider.dll">
+      <publishTime>02/16/2017 14:34:02</publishTime>
+    </File>
+    <File Include="bin/HGShare.Enums.dll">
+      <publishTime>02/16/2017 14:33:50</publishTime>
+    </File>
+    <File Include="bin/HGShare.FileManager.dll">
+      <publishTime>02/16/2017 14:34:06</publishTime>
+    </File>
+    <File Include="bin/HGShare.Log.dll">
+      <publishTime>02/16/2017 14:34:01</publishTime>
+    </File>
+    <File Include="bin/HGShare.Model.dll">
+      <publishTime>02/16/2017 14:33:40</publishTime>
+    </File>
+    <File Include="bin/HGShare.Site.dll">
+      <publishTime>02/16/2017 14:33:51</publishTime>
+    </File>
+    <File Include="bin/HGShare.Utils.FileCloud.dll">
+      <publishTime>02/16/2017 14:33:58</publishTime>
+    </File>
+    <File Include="bin/HGShare.Utils.Interface.dll">
+      <publishTime>02/16/2017 14:33:48</publishTime>
+    </File>
+    <File Include="bin/HGShare.VWModel.dll">
+      <publishTime>02/16/2017 14:33:53</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>02/15/2017 15:06:35</publishTime>
+    </File>
+    <File Include="bin/Nest.dll">
+      <publishTime>01/03/2017 15:51:00</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>02/15/2017 15:06:35</publishTime>
+    </File>
+    <File Include="bin/Qiniu.dll">
+      <publishTime>02/13/2017 18:16:39</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>02/15/2017 15:07:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>02/15/2017 15:06:48</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>02/15/2017 15:06:59</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.Deployment.dll">
+      <publishTime>02/15/2017 15:07:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.dll">
+      <publishTime>02/15/2017 15:07:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.Razor.dll">
+      <publishTime>02/15/2017 15:07:20</publishTime>
+    </File>
+    <File Include="bin/Webdiyer.MvcPager.dll">
+      <publishTime>02/15/2017 15:07:37</publishTime>
+    </File>
+    <File Include="bin/zh-CHS/Webdiyer.MvcPager.resources.dll">
+      <publishTime>02/15/2017 15:07:37</publishTime>
+    </File>
+    <File Include="bin/zh-CHT/Webdiyer.MvcPager.resources.dll">
+      <publishTime>02/15/2017 15:07:37</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Helpers.resources.dll">
+      <publishTime>02/15/2017 15:07:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Mvc.resources.dll">
+      <publishTime>02/15/2017 15:06:50</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Razor.resources.dll">
+      <publishTime>02/15/2017 15:07:02</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Webpages.Deployment.resources.dll">
+      <publishTime>02/15/2017 15:07:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Webpages.Razor.resources.dll">
+      <publishTime>02/15/2017 15:07:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Webpages.resources.dll">
+      <publishTime>02/15/2017 15:07:22</publishTime>
+    </File>
+    <File Include="Config/ConnectionString.config">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Config/log4net.config">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>01/03/2017 15:50:37</publishTime>
+    </File>
+    <File Include="Handles/Upload.ashx">
+      <publishTime>01/03/2017 15:50:52</publishTime>
+    </File>
+    <File Include="Hplus/css/animate.min.css">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/bootstrap.min.css">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/font-awesome.min.css">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/login.min.css">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/patterns/header-profile-skin-1.png">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/patterns/header-profile-skin-3.png">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/patterns/header-profile.png">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/patterns/shattered.png">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/chosen/chosen-sprite%402x.png">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/chosen/chosen-sprite.png">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/chosen/chosen.css">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/clockpicker/clockpicker.css">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/colorpicker/css/bootstrap-colorpicker.min.css">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/colorpicker/img/bootstrap-colorpicker/alpha-horizontal.png">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/colorpicker/img/bootstrap-colorpicker/alpha.png">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/colorpicker/img/bootstrap-colorpicker/hue-horizontal.png">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/colorpicker/img/bootstrap-colorpicker/hue.png">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/colorpicker/img/bootstrap-colorpicker/saturation.png">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/cropper/cropper.css">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/cropper/cropper.min.css">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/datapicker/datepicker3.css">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/iCheck/custom.css">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/iCheck/green%402x.png">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/iCheck/green.png">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/images/sort_asc.png">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/images/sort_desc.png">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/images/sprite-skin-flat.png">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/images/spritemap%402x.png">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/images/spritemap.png">
+      <publishTime>01/03/2017 15:50:40</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/jsTree/32px.png">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/jsTree/style.min.css">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/jsTree/throbber.gif">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/markdown/bootstrap-markdown.min.css">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/css/plugins/switchery/switchery.css">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/css/style.min.css">
+      <publishTime>01/03/2017 15:50:39</publishTime>
+    </File>
+    <File Include="Hplus/favicon.ico">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/fonts/fontawesome-webfont.svg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/fonts/fontawesome-webfont.ttf">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/fonts/fontawesome-webfont.woff">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/fonts/fontawesome-webfont.woff2">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/a1.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/a2.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/a3.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/a4.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/a5.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/a6.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/a7.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/a8.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/a9.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/bg.png">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/iconfont-logo.png">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/icons.png">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/index.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/index_4.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/loading-upload.gif">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/locked.png">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/login-background.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/p1.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/p2.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/p3.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/profile.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/profile_big.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/profile_small.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/progress.png">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/p_big1.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/p_big2.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/p_big3.jpg">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/qr_code.png">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/success.png">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/user.png">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/img/wenku_logo.png">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/js/bootstrap.min.js">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/contabs.min.js">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/content.min.js">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/hplus.min.js">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/jquery-ui-1.10.4.min.js">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/jquery-ui.custom.min.js">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/js/jquery.form.js">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/jquery.min.js">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/laytpl/laytpl.js">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/manager.tools.js">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/chosen/chosen.jquery.js">
+      <publishTime>01/03/2017 15:50:43</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/clockpicker/clockpicker.js">
+      <publishTime>01/03/2017 15:50:42</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/colorpicker/bootstrap-colorpicker.min.js">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/cropper/cropper.js">
+      <publishTime>01/03/2017 15:50:47</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/cropper/cropper.min.js">
+      <publishTime>01/03/2017 15:50:47</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/datapicker/bootstrap-datepicker.js">
+      <publishTime>01/03/2017 15:50:42</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/iCheck/icheck.min.js">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/jsTree/jstree.js">
+      <publishTime>01/03/2017 15:50:42</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/jsTree/jstree.min.js">
+      <publishTime>01/03/2017 15:50:42</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/jsTree/jstree.min.js.bk">
+      <publishTime>01/03/2017 15:50:42</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/layer/layer.js">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/layer/mobile/layer.js">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/layer/mobile/need/layer.css">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/layer/skin/default/icon-ext.png">
+      <publishTime>01/03/2017 15:50:47</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/layer/skin/default/icon.png">
+      <publishTime>01/03/2017 15:50:47</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/layer/skin/default/layer.css">
+      <publishTime>01/03/2017 15:50:47</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/layer/skin/default/loading-0.gif">
+      <publishTime>01/03/2017 15:50:47</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/layer/skin/default/loading-1.gif">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/layer/skin/default/loading-2.gif">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/markdown/bootstrap-markdown.js">
+      <publishTime>01/03/2017 15:50:43</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/markdown/bootstrap-markdown.zh.js">
+      <publishTime>01/03/2017 15:50:43</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/markdown/markdown.js">
+      <publishTime>01/03/2017 15:50:43</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/markdown/markdown.min.js">
+      <publishTime>01/03/2017 15:50:43</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/metisMenu/jquery.metisMenu.js">
+      <publishTime>01/03/2017 15:50:47</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/pace/pace.min.js">
+      <publishTime>01/03/2017 15:50:47</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/slimscroll/jquery.slimscroll.min.js">
+      <publishTime>01/03/2017 15:50:46</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/switchery/switchery.js">
+      <publishTime>01/03/2017 15:50:43</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/validate/jquery.validate.js">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/validate/jquery.validate.min.js">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/validate/jquery.validate.unobtrusive.js">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/validate/jquery.validate.unobtrusive.min.js">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/validate/messages_zh.js">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="Hplus/js/plugins/validate/messages_zh.min.js">
+      <publishTime>01/03/2017 15:50:41</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>01/03/2017 15:50:52</publishTime>
+    </File>
+    <File Include="StaticFile/Scripts/hgbase.js">
+      <publishTime>01/03/2017 15:50:52</publishTime>
+    </File>
+    <File Include="UploadFiles/Avatar/defaultavatar0.jpg">
+      <publishTime>01/03/2017 15:50:51</publishTime>
+    </File>
+    <File Include="UploadFiles/Avatar/defaultavatar1.jpg">
+      <publishTime>01/03/2017 15:50:51</publishTime>
+    </File>
+    <File Include="UploadFiles/Avatar/defaultavatar2.jpg">
+      <publishTime>01/03/2017 15:50:52</publishTime>
+    </File>
+    <File Include="Views/AdminLogs/Index.cshtml">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Views/Articles/Add.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Articles/Edit.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Articles/Index.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/ArticleTypes/Add.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/ArticleTypes/ArticleTypeSelect.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/ArticleTypes/Edit.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/ArticleTypes/Index.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Attachments/Index.cshtml">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Views/Comments/Content.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Comments/Index.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Home/Icos.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Home/Main.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Login/Index.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Moduls/Add.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Moduls/Edit.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Moduls/Index.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Moduls/ModulSelect.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Roles/Add.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Roles/AllocationModul.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Roles/Edit.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Roles/Index.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Shared/Menus.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Shared/_HContentLayout.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Tips/Tips.cshtml">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Views/Upload/UploadImageView.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Users/Add - 复制.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Users/Add.cshtml">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Views/Users/Edit.cshtml">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Views/Users/Index.cshtml">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Views/Users/ModifyPassWord.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/Users/UploadAvatar.cshtml">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/web.config">
+      <publishTime>01/03/2017 15:50:49</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>01/03/2017 15:50:48</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>02/16/2017 14:37:23</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

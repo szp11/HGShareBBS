@@ -3,4 +3,5 @@
 /HGShareBackstage/packages
 /HGShareBackstage/*/obj
 /HGShareBackstage/*/bin
+/HGShareBackstage/*/log
 HGShareBackstage/HGShare.v12.suo
